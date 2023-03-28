@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"
+        integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/87a98d0237.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="/shortener/static/css/styles.css">
+    <title>Acortador</title>
+</head>
+
+<body>
+    <div id="main-app">
+
+        <div class="modal-window" v-if="show_modal">
+            <div class="app-creation-container" v-show="show_creation">
+                <div class="app-creation-content">
+                    <header>Crear Link <a id="close" @click="closeModal()">✖</a></header>
+
+                    <div class="app-creation-inputs">
+                        <input type="text" name="name" id="name" v-model="creation_name" placeholder="Titulo del link" />
+                        <input type="text" name="url" id="url" v-model="creation_url" placeholder="Url a cortar" />
+                    </div>
+                     
+                    <div class="app-creation-buttons">
+                        <input type="button" value="Crear" @click="createLink()" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="app-creation-container" v-show="show_menu">
+                <div class="app-menu-content app-creation-content">
+                    <header>Menu <a id="close" @click="closeModal()">✖</a></header>
+                    <div class="app-menu-buttons">
+                        <a type="button" href="/">Ir a chollos</a>
+                        <a type="button" href="/logout">Salir de la app</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="app-creation-container" v-show="show_delete_menu">
+                <div class="app-menu-content app-creation-content">
+                    <header>Atención <a id="close" @click="closeModal()">✖</a></header>
+                    <div class="app-menu-text">
+                        ¿Esta seguro que desea eliminar este elemento?
+                    </div>
+                    <div class="app-menu-buttons">
+                        <input type="button" value="Confirmar" @click="deleteElement()" />
+                        <input type="button" value="Cancelar" @click="closeModal()" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="app-creation-container" v-if="show_created_item">
+                <div class="app-menu-content app-creation-content">
+                    <header>Crear Link <a id="close" @click="closeModal()">✖</a></header>
+                    <div class="app-created-info">{{item.info}}</div>
+
+                    <div class="app-url-title app-created-title">{{item.data.title}}</div>
+                    <a class="app-item-url app-created-url" :href="item.original_url" target="_blank">{{item.data.original_url}}</a>
+
+                    <div class="app-creation-details app-created-details">
+                        <a class="chollito-url" :class="verifyAnimation()" :href="item.data.url" target="_blank">{{item.data.url}}</a>
+                        <input type="hidden" id="cholli-url" :value="item.data.url">
+                        <input type="button" value="Copiar" class="chollito-copy-button" @click="onClick()">
+                        <input type="button" value="Eliminar" class="chollito-copy-button" @click="showDeleteMenu(item.uuid)">
+                    </div>
+
+                    <div class="app-menu-buttons app-created-buttons">
+                        <input type="button" value="Cerrar" @click="closeModalOnCreatedItem()" />
+                    </div>
+                </div>
+            </div>      
+        </div>
+
+        <header class="app-header">
+            <div class="app-header-container">
+                <div class="app-header-searcher">
+                    <input type="text" placeholder="Buscar.." maxlength="25">
+                    <i class="fas fa-search" style="position: absolute;color: white;font-size: 3vh;margin: 2.5vh;left: 33vh;opacity: 0.7;cursor: pointer;"></i>
+                </div>
+
+                <div class="app-header-content">
+                    <div class="app-header-button">
+                        <a id="app-header-button" type="button" href="/">Chollos</a>
+                        <button id="app-header-button" @click="newLinkWindow()">Crear <i class="fas fa-plus-square"></i></button>
+                    </div>
+                    <div class="app-header-menu">
+                        <button @click="showMenu()"><i class="fas fa-bars"></i></button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="app-main">
+            <nav class="app-url-section" :class="getUrlSection()">
+                <div class="app-url-info">
+                    <span class="app-total-links">{{total_links}} Links</span>
+                </div>
+                <div class="urls" v-for="(item, index) in urls">
+
+                    <a class="chollitos-item--MAIN" :class="validate(index)" @click="switchTo(index)">
+                        <time class="app-item-create-date">{{item.data.created.month}} {{item.data.created.year}}</time>
+                        <div class="chollitos-item-url">{{item.data.original_url}}</div>
+                        <div class="chollitos-item-shorturl">{{item.data.url}}</div>
+                    </a>
+
+                </div>
+
+            </nav>
+
+            <div class="app-main-container" v-if="!!item">
+
+                <header><a id="app-close-detail" v-if="!!item" @click="closeDetailWindow()">✖</a></header>
+                <div class="app-content" v-if="!!item">
+                    <div class="app-content-detail">
+                        <div class="app-url-time">{{item.data.created.day}} {{item.data.created.month}} {{item.data.created.year}}</div>
+                        <div class="app-url-title">{{item.data.title}}</div>
+                        <a class="app-item-url" :href="item.original_url" target="_blank">{{item.data.original_url}}</a>
+                    </div>
+
+                    <div class="app-chollito-detail">
+                        <div class="app-chollito-total">
+                            {{item.clicks}} Clicks en total.
+                        </div>
+                        <a class="chollito-url" :class="verifyAnimation()" :href="item.data.url" target="_blank">{{item.data.url}}</a>
+                        <input type="hidden" id="cholli-url" :value="item.data.url">
+                        <input type="button" value="Copiar" class="chollito-copy-button" @click="onClick()">
+                        <input type="button" value="Eliminar" class="chollito-copy-button" @click="showDeleteMenu(item.uuid)">
+
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    </div>
+    <script src="/shortener/static/js/vue.min.js"></script>
+    <script src="/shortener/static/js/app.js"></script>
+    
+</body>
+
+</html>

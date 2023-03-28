@@ -1,0 +1,528 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+}
+
+.modal-window {
+    display: inline-block;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: hidden;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+}
+
+.app-creation-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    justify-items: center;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.app-creation-content {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* justify-content: center; */
+    width: 40vh;
+    height: 100%;
+    background-color: white;
+    /* border-radius: 4px; */
+    overflow: hidden;
+    box-shadow: black 1px 1px 4px;
+    z-index: 300;
+}
+
+.app-menu-text {
+
+    display: flex;
+    height: 35vh;
+    text-align: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-family: 'Noto Sans', sans-serif;
+
+}
+
+.app-creation-content>.app-creation-inputs {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 50vh;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+.app-creation-content>header {
+    font-size: 24px;
+    font-weight: 700;
+    width: 100%;
+    font-family: 'Noto Sans', sans-serif;
+    padding: 8px;
+}
+
+.app-creation-content>header>a {
+    position: sticky;
+    left: 90%;
+    font-size: 24px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.app-creation-content>.app-creation-inputs>input {
+    width: 90%;
+    /* margin: 4px; */
+    margin-bottom: 8vh;
+    border-radius: 8px;
+    border: 1px solid #828387;
+    padding: 8px;
+    outline: none;
+    height: 7vh;
+    font-size: 1.5rem;
+}
+
+.app-creation-content>.app-creation-inputs>input::placeholder {
+    color: black;
+}
+
+.app-creation-content>.app-creation-buttons {
+    display: flex;
+    width: 100%;
+    height: 7vh;
+    justify-content: center;
+    /* border-top: 1px solid #828387; */
+}
+
+.app-creation-content>.app-creation-buttons>input {
+    font-size: 3vh;
+    font-family: 'Noto Sans', sans-serif;
+    margin-bottom: 12px;
+    background: transparent;
+    border: 1px solid rgb(208, 38, 97);
+    border-radius: 3px;
+    outline: none;
+    width: 90%;
+    padding: 2px;
+    color: rgb(218, 51, 109);
+}
+
+.app-creation-content>.app-creation-buttons>input:hover {
+    color: white;
+    background-color: rgb(208, 38, 97);
+}
+
+.app-menu-buttons {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 50vh;
+    justify-content: space-evenly;
+    text-align: center;
+    align-items: center;
+}
+
+.app-menu-buttons>input {
+    font-size: 3vh;
+    font-family: 'Noto Sans', sans-serif;
+    margin-bottom: 12px;
+    background: transparent;
+    border: 1px solid rgb(208, 38, 97);
+    border-radius: 3px;
+    outline: none;
+    width: 40%;
+    padding: 2px;
+    color: rgb(218, 51, 109);
+}
+
+.app-menu-buttons>input:hover {
+    color: white;
+    background-color: rgb(208, 38, 97);
+}
+
+.app-menu-buttons>a {
+    width: 90%;
+    background: transparent;
+    border: 1px solid #828387;
+    color: black;
+    border-radius: 3px;
+    outline: none;
+    padding: 8px;
+    text-decoration: none;
+}
+
+.app-created-buttons {
+
+    height: 16vh !important;
+}
+
+.app-created-info {
+
+    font-size: 1.5rem;
+
+    font-family: 'Noto Sans', sans-serif;
+
+    color: rgb(208, 38, 97);
+
+    height: 8vh;
+
+    padding: 1vh;
+}
+
+.app-created-title {
+    font-size: 1.2rem !important;
+    padding: 1vh;
+    height: 14vh;
+}
+
+.app-created-url {
+
+    font-size: 0.8rem !important;
+
+    padding: 1vh;
+}
+
+.app-created-details {
+    padding: 1vh !important;
+}
+
+.app-header {
+    display: relative;
+    height: 10vh;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.app-header>.app-header-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    justify-content: space-between;
+    background-color: rgb(21, 32, 43);
+    padding: 10px;
+}
+
+.app-header>.app-header-container>.app-header-searcher {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.app-header>.app-header-container>.app-header-searcher>input {
+    height: 100%;
+    border: 1px solid rgb(67, 103, 141);
+    outline: none;
+    border-radius: 24px;
+    padding: 16px;
+    background: transparent;
+    color: white;
+    font-size: 2vh;
+    font-family: 'Noto Sans', sans-serif;
+    width: 40vh;
+}
+
+.app-header>.app-header-container>.app-header-content {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-evenly; */
+    align-items: center;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.app-header-button {
+    display: flex;
+    width: 100%;
+    text-align: center;
+    justify-content: flex-end;
+    align-items: initial;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.app-header>.app-header-container>.app-header-content>.app-header-menu {
+    width: 15vh;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+#app-header-button {
+    width: 16vh;
+    margin: 4px;
+    outline: none;
+    border: none;
+    border-radius: 8px;
+    height: 30px;
+    border: 1px solid rgb(67, 103, 141);
+    background: transparent;
+    color: #E6E6E6;
+    font-size: 3vh;
+    font-family: 'Noto Sans', sans-serif;
+    transition: .3s ease-out;
+    text-decoration: none;
+    height: 7vh;
+    padding: 2vh!important;
+}
+
+.app-header>.app-header-container>.app-header-content>.app-header-button>button:hover {
+    color: white;
+    transition: .3s ease-out;
+    text-shadow: 1px 1px 8px rgba(255, 255, 255, 0.5);
+}
+
+.app-header>.app-header-container>.app-header-content>.app-header-menu>button {
+    width: 40%;
+    margin: 4px;
+    outline: none;
+    border: none;
+    border-radius: 8px;
+    height: 30px;
+    font-size: 4vh;
+    height: 8vh;
+    background: transparent;
+    color: rgb(233, 233, 233);
+}
+
+.app-header>.app-header-container>.app-header-content>.app-header-menu>button:hover {
+    color: white;
+    text-shadow: 1px 1px 8px rgba(255, 255, 255, 0.5);
+
+}
+
+::placeholder {
+    color: white;
+}
+
+.app-main {
+    display: flex;
+    width: 100%;
+    height: 90vh;
+}
+
+.app-url-section {
+    display: block;
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 100%;
+    width: 35%;
+    background-color: rgb(246, 246, 247);
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.chollitos-item--ACTIVE {
+    display: block;
+    padding: 1.25rem 2.75rem 1.2rem;
+    border-top: 1px solid #d3d4d7;
+    background-color: #fff;
+
+}
+
+.chollitos-item--MAIN {
+    display: block;
+    padding: 1.25rem 2.75rem 1.2rem;
+    border-top: 1px solid #d3d4d7;
+    cursor: pointer;
+}
+
+.chollitos-item-url {
+    color: #36383b;
+    font: 1.6rem/2.2rem;
+    margin-bottom: .75rem;
+    word-wrap: break-word;
+    height: 1.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.app-url-info {
+    display: inline-block;
+    width: 100%;
+    height: 8vh;
+    padding: 3vh 2.6rem 1.25rem;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.app-url-info>.app-total-links {
+    margin: 10px;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.chollitos-item-shorturl {
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 1.3rem/1.8rem;
+    color: rgb(208, 38, 97);
+}
+
+.app-item-create-date {
+    color: #828387;
+    letter-spacing: .3px;
+    font-family: 'Noto Sans', sans-serif;
+    font: 1.1rem/1.5rem;
+    text-transform: uppercase;
+}
+
+.app-main-container {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+.app-content {
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    height: 90vh;
+}
+
+.app-content-detail {
+    display: block;
+    width: 100%;
+    height: 50%;
+    border-bottom: 1px solid grey;
+}
+
+.app-url-time {
+    color: #828387;
+    letter-spacing: .3px;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.app-url-title {
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 6vh;
+    overflow: hidden;
+    text-transform: uppercase;
+}
+
+.app-item-url {
+    font-family: 'Noto Sans', sans-serif;
+    text-decoration: none;
+    color: #828387;
+    word-wrap: break-word;
+    font-size: 2vh;
+}
+
+.app-chollito-detail {
+    display: block;
+    width: 100%;
+    height: 85%;
+}
+
+.app-chollito-total {
+    color: #2b2b2b;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 4vh;
+    height: 30vh;
+}
+
+.chollito-url {
+    display: inline-block;
+    position: inherit;
+    text-decoration: none;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 14px;
+    color: rgb(208, 38, 97);
+    cursor: pointer;
+}
+
+.chollito-copy-button {
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 12px;
+    background: transparent;
+    border: 1px solid rgb(208, 38, 97);
+    border-radius: 3px;
+    outline: none;
+    width: max-content;
+    padding: 2px;
+    color: rgb(218, 51, 109);
+    ;
+}
+
+.chollito-copy-button:hover {
+    color: white;
+    background-color: rgb(208, 38, 97);
+}
+
+.on-click {
+    animation: on_click 0.4s ease-in;
+}
+
+.app-main-container > header{
+    display:none;
+}
+
+@keyframes on_click {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-2px);
+        opacity: 0.07;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@media only screen and (max-width:900px) {
+    .app-header-searcher {
+        display: none !important;
+    }
+    .app-url-title {
+        font-size: 3vh;
+    }
+    #app-header-button {
+        font-size: 2vh;
+        padding: 13px;
+    }
+    .app-main-container > header{
+        display: inline-block;
+        width: 100%;
+        height: 6vh;
+        font-size: 3vh;
+        text-align: end;
+        background: rgb(208, 38, 97);
+    }
+    .app-main-container > header > a{
+        color: white;
+        font-size: 4vh;
+        padding: 2vh;
+        cursor: pointer;
+    }
+    .app-url-section{
+        width: fit-content;
+    }
+    .fix-url-section{
+        display: none!important;
+    }
+}
