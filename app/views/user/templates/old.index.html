@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/session/static/css/styles.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/87a98d0237.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+        integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"
+        integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+    <title> Chollos Alert </title>
+</head>
+
+<body>
+    <div class="notify-container" id="notify-app">
+
+        <transition-group name="list" tag="div" class="app-notify-container">
+            <div class="app-notify-card" v-for="(item, index) in items" :key="item.uuid">
+                <div class="app-notify-content" :id="item._type">
+                    <div class="app-notify-header">
+                        <header>{{item.title}}</header>
+                    </div>
+                    <div class="app-notify-description">
+                        <p id="description">{{item.description}}</p>
+                    </div>
+                </div>
+            </div>
+        </transition-group>
+
+    </div>
+
+    <div class="modal-container" id="program-app" v-show="window">
+        <div class="app-item-program">
+
+            <div class="app-item-confirmation-container" v-show="is_confirmation">
+                <div class="app-item-confirmation-content">
+                    <header id="confirmation-header">
+                        <h1>¿Está seguro que desea publicar este chollo?</h1>
+                    </header>
+                    <div class="app-confirmation-button">
+                        <input type="button" value="Si" id="save" @click="postNow()" />
+                        <input type="button" value="No" id="cancel" @click="closeConfirmationWindow()" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="app-menu-container app-creation-container" v-show="show_menu">
+                <div class="app-creation-content">
+                    <header>Menu <a id="close" @click="closeWindow()">✖</a></header>
+                    <div class="app-menu-buttons">
+                        <a type="button" href="/shortener/dashboard">Acortador</a>
+                        <a type="button" @click="showConfigsMenu()">Configuración</a>
+                        <a type="button" href="/logout">Salir de la app</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="app-menu-container app-creation-container" v-show="show_configs_menu">
+                <div class="app-creation-content">
+                    <header>Configuración <a id="close" @click="closeWindow()">✖</a></header>
+                    <div class="app-menu-buttons">
+                        <a type="button" @click="showShortenerConfigs()">Acortadores</a>
+                        <a type="button" @click="showSpeakersMenu()">Altavoces</a>
+                        <a type="button" @click="showMenu()">Volver</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="app-menu-container app-creation-container" v-show="show_speakers_menu">
+                <div class="app-creation-content">
+                    <header>Configuración de altavoces <a id="close" @click="closeWindow()">✖</a></header>
+                    <div class="app-menu-buttons">
+                        <a type="button" @click="showTelegramMenu()">Telegram</a>
+                        <a type="button" @click="showTwitterMenu()">Twitter</a>
+                        <a type="button" @click="showFacebookMenu()">Facebook</a>
+                        <a type="button" @click="showMenu()">Volver</a>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="app-menu-container app-creation-container" v-show="show_shortener_menu">
+                <div class="app-creation-content">
+                    <header>Acortadores <a id="close" @click="closeWindow()">✖</a></header>
+                    <div class="app-selection-container app-menu-buttons">
+                        <span>
+                            <label>Que acortador desea usar?</label>
+                            <select name="time" v-model="shortener">
+                                <option value="chollito">Cholli.to</option>
+                                <option value="bitly">Bitly</option>
+                            </select>
+                        </span>
+                        <span>
+                            <input type="button" value="Guardar" id="save"
+                                style="border: none;width: 30vh;height: 4vh;margin-top: 22vh;"
+                                @click="vm.saveShortener(shortener)" />
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="app-menu-container app-creation-container" v-show="show_telegram_configs">
+
+                <div class="app-creation-content">
+                    <header>Configuración de Telegram <a id="close" @click="closeWindow()">✖</a></header>
+                    <div class="options-telegram app-menu-buttons">
+                        <span>
+                            <label>Token del bot</label>
+                            <input type="text" placeholder="Token del Bot" v-model="vm.bot_token">
+                        </span>
+                        <span>
+                            <label>Nombre del canal</label>
+                            <input type="text" placeholder="@Chollos20.." v-model="vm.bot_channel">
+                        </span>
+                        <span>
+                            <input type="button" value="Guardar" id="save"
+                                style="border: none;width: 30vh;height: 4vh;/* margin-top: 14px; *//* margin-left: 10px; */border-radius: 4px;"
+                                @click="vm.saveBotTelegramParams()" />
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="app-menu-container app-creation-container" v-show="show_twitter_configs">
+                <div class="app-creation-content">
+
+                    <header>Configuración de Twitter <a id="close" @click="closeWindow()">✖</a></header>
+
+                    <div class="options-twitter app-menu-buttons">
+
+                        <span>
+                            <label>Access Token</label>
+                            <input type="text" placeholder="Access Token" v-model="vm.twitter_access_token">
+                        </span>
+                        <span>
+                            <label>Secret Access Token</label>
+                            <input type="text" placeholder="Secret Access Token"
+                                v-model="vm.twitter_secret_access_token">
+                        </span>
+                        <span>
+                            <label>Consumer Key</label>
+                            <input type="text" placeholder="Consumer Key" v-model="vm.twitter_consumer_key">
+                        </span>
+                        <span>
+                            <label>Consumer Secret</label>
+                            <input type="text" placeholder="Consumer Secret" v-model="vm.twitter_consumer_secret">
+                        </span>
+                        <span>
+                            <input type="button" value="Guardar" id="save"
+                                style="border: none;width: 30vh;height: 4vh;/* margin-top: 14px; *//* margin-left: 10px; */border-radius: 4px;"
+                                @click="vm.saveBotTwitterParams()" />
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="app-menu-container app-creation-container" v-show="show_facebook_configs">
+                <div class="app-creation-content">
+                    <header>Configuración de Facebook <a id="close" @click="closeWindow()">✖</a></header>
+
+                    <div class="options-facebook app-menu-buttons">
+                        <span>
+                            <label>Correo Electronico</label>
+                            <input type="text" placeholder="Correo Electronico" v-model="vm.facebook_username">
+                        </span>
+                        <span>
+                            <label>Password</label>
+                            <input type="password" placeholder="Password" v-model="vm.facebook_password">
+                        </span>
+                        <span>
+                            <input type="button" value="Guardar" id="save"
+                                style="border: none;width: 30vh;height: 4vh;/* margin-top: 14px; *//* margin-left: 10px; */border-radius: 4px;"
+                                @click="vm.saveBotFacebookParams()" />
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="app-item-edit-container" v-show="is_editing">
+                <div class="app-item-edit-content">
+                    <header class="app-item-edit-title">
+                        <h1>Programar Chollo</h1>
+                    </header>
+
+                    <form v-on:submit.prevent="savedItem()" id="form-item-edit">
+                        <span>
+                            <label> Título del chollo </label>
+                            <input type="text" id="title" v-model="title"></input>
+                        </span>
+                        <span>
+                            <label> Descripción </label>
+                            <textarea v-model="description" id="description_chollo" style="border: solid 1px black;min-width:100px;padding: 5px;display: inline-block;"></textarea>
+                        </span>
+
+                        <span>
+                            <label> Url del chollo </label>
+                            <input type="text" id="url" v-model="chollo_url"></input>
+
+                        </span>
+                        <span>
+                            <label> Publicar en </label>
+                            <input id="time" type="time" v-model="time">
+                        </span>
+
+
+                        <div class="app-item-selected">
+                            <span id="select-h">
+                                <label> Repetir? </label>
+                                <input type="checkbox" v-model="repeat"></input>
+                                <select name="time" v-model="repeat_time" v-show="repeat">
+                                    <option value="60">1m</option>
+                                    <option value="300">5m</option>
+                                    <option value="600">10m</option>
+                                    <option value="900">15m</option>
+                                    <option value="1200">20m</option>
+                                    <option value="1800">30m</option>
+                                    <option value="3600">1h</option>
+                                    <option value="7200">2h</option>
+                                    <option value="18000">5h</option>
+                                </select>
+                            </span>
+                            <span id="select-h">
+                                <label> Telegram </label>
+                                <input type="checkbox" v-model="telegram"></input>
+                            </span>
+                            <span id="select-h">
+                                <label> Twitter </label>
+                                <input type="checkbox" v-model="twitter"></input>
+                            </span>
+                            <span id="select-h">
+                                <label> Facebook </label>
+                                <input type="checkbox" v-model="facebook"></input>
+                            </span>
+                        </div>
+
+                    </form>
+                    <div class="app-edit-buttons">
+                        <input type="button" value="Publicar ahora" id="save" @click="postItem()" v-show="!as_edit">
+                        <input type="submit" value="Programar chollo" id="save" form="form-item-edit">
+                        <input type="button" value="Cancelar" id="cancel" @click="closeWindow()">
+                        <input type="button" value="Eliminar Chollo" id="cancel" @click="deleteChollo()">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="main-container" id="main-app">
+
+        <header class="app-header">
+            <div class="app-header-container">
+                <div class="app-header-content">
+                    <div class="app-header-menu">
+                        <button @click="showMenu()"><i class="fas fa-bars"></i></button>
+                    </div>
+                    <div class="app-header-button">
+                        <a id="app-header-button" type="button"  href="/shortener/dashboard">Acortador</a>
+                    </div>
+                </div>
+
+            </div>
+        </header>
+
+        <div class="app-container">
+            <div class="app-items-news">
+                <span id="title-container">
+                    <input type="button" id="soy-de-chollos-b" value="SoyDeChollos" @click="switchTo(1)">
+                    <input type="button" id="chollometro-b" value="Chollometro" @click="switchTo(2)">
+                    <input type="button" id="michollo-b" value="Michollo" @click="switchTo(3)">
+                </span>
+
+                <div class="app-items-content">
+                    <div class="lds-ring">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+
+                    <div class="app-items-template" v-for="(item, index) in new_items">
+                        <div class="app-image">
+                            <img :src="item.image_url" alt="Image">
+                        </div>
+                        <div class="app-content">
+                            <div class="app-content-header">
+
+                                <span id="title" v-if="item.title.length <= 30">
+                                    <p> {{item.title}} </p>
+                                </span>
+
+                                <span id="title" v-else>
+                                    <p> {{item.title.substring(0, 50)}}... </p>
+                                </span>
+
+                                <div class="item-values">
+                                    <span id="regular-price" v-if="item.regular_price != undefined">
+                                        {{item.regular_price}}€
+                                    </span>
+                                    <span id="regular-price" v-else style="display: none;">
+                                        2555
+                                    </span>
+                                    <span id="price" v-if="item.price != undefined">
+                                        {{item.price}}€
+                                    </span>
+                                    <span id="price" v-else-if="item.discount != undefined">
+                                        {{item.discount}}
+                                    </span>
+                                    <span id="price" v-else style="display:none;">
+
+                                    </span>
+                                    <span id="market" v-if="item.market != undefined">
+                                        {{item.market}}
+                                    </span>
+                                    <span id="market" v-else>
+                                        {{item.market}}
+                                    </span>
+                                </div>
+
+                            </div>
+                            <div class="app-content-description">
+                                <span v-if="item.description.length <= 35" style="padding-left: 8px;height:14px;">
+                                    {{item.description}}
+                                </span>
+                                <span v-else style="padding-left: 8px;height:14px;">
+                                    {{item.description.substring(0, 35)}}...
+                                </span>
+                                <div class="app-buttons">
+                                    <input type="button" value="Programar" id="program"
+                                        @click="openProgramChollo(index)">
+                                    <input type="button" value="Ver Chollo" id="go_market"
+                                        @click="openTabUrl(item.chollo_url)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="app-items-saved">
+                <span id="title-container"
+                    style="position: absolute;color: black;font-size: 24px;margin-left: 10px;margin-bottom: 30px;">
+                    <header> Chollos Guardados </header>
+                </span>
+                <div class="app-items-content">
+                    <div class="lds-ring">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <div class="app-items-template" v-for="(item, index) in saved_items">
+                        <div class="app-image">
+                            <img :src="item.image_url" alt="Image">
+                        </div>
+                        <div class="app-content">
+                            <div class="app-content-header">
+
+                                <span id="title" v-if="item.title.length <= 30">
+                                    <p> {{item.title}} </p>
+                                </span>
+
+                                <span id="title" v-else>
+                                    <p> {{item.title.substring(0, 30)}}... </p>
+                                </span>
+
+                                <div class="item-values">
+                                    <span id="regular-price" v-if="item.regular_price != undefined">
+                                        {{item.regular_price}}€
+                                    </span>
+                                    <span id="regular-price" v-else style="display: none;">
+                                        2323
+                                    </span>
+                                    <span id="price" v-if="item.price != undefined">
+                                        {{item.price}}€
+                                    </span>
+                                    <span id="price" v-else-if="item.discount != undefined">
+                                        {{item.discount}}
+                                    </span>
+                                    <span id="price" v-else style="display:none;">
+
+                                    </span>
+                                    <span id="market" v-if="item.market != undefined">
+                                        {{item.market}}
+                                    </span>
+                                    <span id="market" v-else>
+                                        {{item.market}}
+                                    </span>
+                                </div>
+
+                            </div>
+                            <div class="app-content-description">
+                                <span v-if="item.description.length <= 35" style="padding-left: 8px;height:14px;">
+                                    {{item.description}}
+                                </span>
+                                <span v-else style="padding-left: 8px;height:14px;">
+                                    {{item.description.substring(0, 35)}}...
+                                </span>
+                                <div class="app-buttons">
+                                    <input type="button" value="Editar" id="program" @click="openEditChollo(index)">
+                                    <input type="button" value="Publicar YA" id="go_market" @click="postNow(item)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="secondary-container">
+                <div class="options-container">
+                    <div class="logs-container">
+                        
+                        <a>Logs<i class="fas fa-trash-alt" @click="clearLogs()"></i></a>
+                        <div class="logs-content">
+                            <span v-for="item in logs">
+                                <p>{{item.title.substring(0, 30)}}..</p><a :href="item.url" target="_blank">{{item.url.substring(0, 30)}}</a><time>{{item.time}}</time>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/session/static/js/vue.min.js"></script>
+    <script src="/session/static/js/script.js"></script>
+</body>
+
+</html>
