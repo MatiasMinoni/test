@@ -9,7 +9,7 @@
   const FORMAT = params.get('format') === 'portrait' ? 'portrait' : 'landscape';
   const RENDER = params.has('render');
   const DURATION = 15;
-  const URL_TEXT = 'tumarca.com/nova-run';
+  const URL_TEXT = 'https://tumarca.com/nova-run';
 
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -36,7 +36,7 @@
     people.appendChild(el);
   }
   const confetti = $('#confetti');
-  const confColors = ['#8B5CF6', '#22D3EE', '#34D399', '#A78BFA', '#FF5A36', '#FFC93C', '#ffffff'];
+  const confColors = ['#1A7BFF', '#4B9BFF', '#FFFFFF', '#22C55E', '#FF5A36', '#FFC93C', '#A9CEFF'];
   for (let i = 0; i < 40; i++) {
     const el = document.createElement('i');
     el.style.background = confColors[i % confColors.length];
@@ -93,7 +93,7 @@
   tl.fromTo('#s1 .l2 .w',
     { yPercent: 70, autoAlpha: 0, filter: 'blur(14px)' },
     { yPercent: 0, autoAlpha: 1, filter: BLUR0, duration: .6, stagger: .05 }, .36);
-  tl.fromTo('#s1 .l2 .grad', { scale: .7 }, { scale: 1, duration: .7, ease: 'back.out(2.2)', transformOrigin: '50% 70%' }, .36);
+  tl.fromTo('#s1 .l2 .hl', { scale: .7 }, { scale: 1, duration: .7, ease: 'back.out(2.2)', transformOrigin: '50% 70%' }, .36);
   tl.to('#s1 .hook', { scale: .9, y: -50, autoAlpha: 0, filter: 'blur(16px)', duration: .3, ease: 'power2.in' }, 1.38);
 
   /* ---------- Marca y guía de pasos ---------- */
@@ -107,8 +107,8 @@
   stepT.forEach((t, i) => {
     tl.to('#stepFill', { width: `${i * 25}%`, duration: .55, ease: 'power2.inOut' }, t - .15);
     tl.to(dots[i], { scale: 1, duration: .45, ease: 'back.out(3)' }, t + .2);
-    tl.to(labels[i], { color: '#F4F4FB', duration: .3 }, t + .2);
-    if (i > 0) tl.to(labels[i - 1], { color: '#A3A3C2', duration: .3 }, t + .2);
+    tl.to(labels[i], { color: '#FFFFFF', duration: .3 }, t + .2);
+    if (i > 0) tl.to(labels[i - 1], { color: '#A1A1AA', duration: .3 }, t + .2);
   });
   tl.to('#stepper', { y: 30, autoAlpha: 0, duration: .3, ease: 'power2.in' }, 10.62);
 
@@ -117,13 +117,13 @@
   tl.fromTo('#s2 .urlbar',
     { y: 50, scale: .9, autoAlpha: 0, filter: 'blur(10px)' },
     { y: 0, scale: 1, autoAlpha: 1, filter: BLUR0, duration: .6, ease: 'expo.out' }, 1.68);
-  tl.to(st, { typed: URL_TEXT.length, duration: .85, ease: 'none' }, 1.95);
+  tl.to(st, { typed: URL_TEXT.length, duration: .9, ease: 'none' }, 1.92);
   rise('#s2 .chip', 2.0, { stagger: .08 });
   tl.to('#urlBtn', { scale: .9, duration: .1, ease: 'power2.in' }, 2.92);
   tl.to('#urlBtn', { scale: 1, duration: .3, ease: 'back.out(3)' }, 3.02);
   tl.fromTo('#urlRipple', { scale: .4, autoAlpha: 1 }, { scale: 1.9, autoAlpha: 0, duration: .55, ease: 'power2.out' }, 2.98);
   tl.to('#s2 .chip:nth-child(2)', {
-    borderColor: '#22D3EE', backgroundColor: 'rgba(34,211,238,.16)', color: '#F4F4FB',
+    borderColor: '#1A7BFF', backgroundColor: 'rgba(26,123,255,.16)', color: '#FFFFFF',
     scale: 1.08, duration: .25, ease: 'back.out(3)',
   }, 3.05);
   exit('#s2', 3.22);
@@ -218,15 +218,21 @@
   tl.set('#s8', { autoAlpha: 1, filter: BLUR0 }, 12.98);
   tl.fromTo('#flash', { autoAlpha: 0 }, { autoAlpha: 1, duration: .15, ease: 'power1.out' }, 12.98);
   tl.to('#flash', { autoAlpha: 0, duration: .7, ease: 'power2.out' }, 13.13);
-  tl.fromTo('#s8 .end-logo .mark', { scale: 0, rotation: -120 }, { scale: 1, rotation: 0, duration: .75, ease: 'back.out(1.8)' }, 13.0);
+  tl.fromTo('#s8 .appicon',
+    { scale: .5, autoAlpha: 0, filter: 'blur(12px)' },
+    { scale: 1, autoAlpha: 1, filter: BLUR0, duration: .6, ease: 'back.out(1.6)' }, 13.0);
+  // El isotipo se "construye" bloque a bloque, como un gráfico que crece
+  tl.fromTo('#s8 .appicon .mark',
+    { clipPath: 'inset(0% 100% 0% 0%)' },
+    { clipPath: 'inset(0% 0% 0% 0%)', duration: .48, ease: 'steps(4)' }, 13.12);
   tl.fromTo('#s8 .end-logo .wordmark',
     { x: FORMAT === 'portrait' ? 0 : -40, y: FORMAT === 'portrait' ? 30 : 0, autoAlpha: 0, filter: 'blur(12px)' },
     { x: 0, y: 0, autoAlpha: 1, filter: BLUR0, duration: .6 }, 13.18);
   rise('#s8 .end-tag', 13.42);
-  rise('#s8 .end-pill', 13.6);
+  rise('#s8 .end-sub', 13.6);
   rise(['#s8 .end-foot', '#s8 .end-by'], 13.78, { stagger: .1 });
   tl.fromTo('#s8 .end', { scale: .97 }, { scale: 1.02, duration: 2, ease: 'sine.out' }, 13.0);
-  tl.to('.b3', { opacity: .5, duration: 1, ease: 'sine.inOut' }, 13.0);
+  tl.to('.b3', { opacity: .2, duration: 1, ease: 'sine.inOut' }, 13.0);
 
   // Ancla la duración exacta
   tl.set({}, {}, DURATION);
