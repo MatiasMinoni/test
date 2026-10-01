@@ -1,0 +1,36 @@
+// Hoja de tiempos compartida por la animación (timeline.js) y la música (audio/score.py).
+// 128 BPM: 1 tiempo = 0,46875 s · 1 compás = 1,875 s · 8 compases = 15 s exactos.
+// Cada escena dura un compás y todos los cortes caen en el tiempo fuerte.
+window.CUES = {
+  "bpm": 128,
+  "end": 15,
+  "bars": [0, 1.875, 3.75, 5.625, 7.5, 9.375, 11.25, 13.125],
+  "hook": [0.1, 0.84],
+  "type": [2.17, 2.95],
+  "url": "https://tumarca.com/nova-run",
+  "clickLink": 3.281,
+  "chipDetect": 3.36,
+  "scan": [3.98, 4.8],
+  "detect": [4.219, 4.453],
+  "results": [4.219, 4.453, 4.688, 4.922],
+  "swatches": 4.98,
+  "skeleton": [5.74, 5.857, 5.974],
+  "generate": [6.094, 6.211, 6.328],
+  "aiBadge": 6.563,
+  "sheen": 6.8,
+  "audRows": [7.734, 7.969, 8.203, 8.438],
+  "pings": [7.734, 8.203, 8.672],
+  "age": [8.0, 8.6],
+  "tags": [8.203, 8.32, 8.437, 8.554],
+  "reach": [8.44, 9.15],
+  "clickPublish": 10.078,
+  "success": 10.313,
+  "stats": [10.547, 10.664],
+  "cmpRows": [11.484, 11.719, 11.953, 12.188, 12.422],
+  "build": [12.0, 13.125],
+  "logoBlocks": [13.125, 13.242, 13.359, 13.477],
+  "logoIcon": 13.6,
+  "wordmark": 13.68,
+  "tagline": 13.95,
+  "footer": 14.25
+};

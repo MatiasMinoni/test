@@ -10,17 +10,19 @@
 <!-- Símbolos compartidos -->
 <svg class="defs" aria-hidden="true">
   <defs>
-    <!-- Isotipo AdsGPT: bloques en escalera (grilla 4×3) -->
+    <!-- Isotipo AdsGPT: 4 bloques en una grilla de 5×3 (celdas 11, 7, 3 y 9), unidos por las esquinas -->
     <symbol id="mark" viewBox="0 0 40 30">
-      <path fill="currentColor" d="M10 12.2A2.2 2.2 0 0 1 12.2 10H18.6A1.4 1.4 0 0 0 20 8.6V2.2A2.2 2.2 0 0 1 22.2 0H27.8A2.2 2.2 0 0 1 30 2.2V8.6A1.4 1.4 0 0 0 31.4 10H37.8A2.2 2.2 0 0 1 40 12.2V17.8A2.2 2.2 0 0 1 37.8 20H10Z"/>
-      <path fill="currentColor" d="M0 22.2A2.2 2.2 0 0 1 2.2 20H10V27.8A2.2 2.2 0 0 1 7.8 30H2.2A2.2 2.2 0 0 1 0 27.8Z"/>
+      <path fill="currentColor" d="M2.2 20H10V27.8A2.2 2.2 0 0 1 7.8 30H2.2A2.2 2.2 0 0 1 0 27.8V22.2A2.2 2.2 0 0 1 2.2 20Z"/>
+      <path fill="currentColor" d="M12.2 10H20V17.8A2.2 2.2 0 0 1 17.8 20H10V12.2A2.2 2.2 0 0 1 12.2 10ZM8.4 20L10 20L10 18.4A1.6 1.6 0 0 1 8.4 20ZM11.6 20L10 20L10 21.6A1.6 1.6 0 0 1 11.6 20Z"/>
+      <path fill="currentColor" d="M22.2 0H27.8A2.2 2.2 0 0 1 30 2.2V10H20V2.2A2.2 2.2 0 0 1 22.2 0ZM18.4 10L20 10L20 8.4A1.6 1.6 0 0 1 18.4 10ZM21.6 10L20 10L20 11.6A1.6 1.6 0 0 1 21.6 10Z"/>
+      <path fill="currentColor" d="M30 10H37.8A2.2 2.2 0 0 1 40 12.2V17.8A2.2 2.2 0 0 1 37.8 20H32.2A2.2 2.2 0 0 1 30 17.8V10ZM31.6 10L30 10L30 8.4A1.6 1.6 0 0 0 31.6 10ZM28.4 10L30 10L30 11.6A1.6 1.6 0 0 0 28.4 10Z"/>
     </symbol>
     <symbol id="sneaker" viewBox="0 0 220 120">
       <path d="M12 86c0 12 7 18 20 18h160c14 0 18-7 18-16v-6H12z" fill="#FFFFFF"/>
-      <path d="M12 82h198v8H12z" fill="var(--sn-mid, #FFC93C)"/>
-      <path d="M16 84l5-30c2-12 10-17 22-15l34 6c11-14 25-23 44-25l12-1c6 11 15 20 28 27 16 9 34 14 44 18 5 3 6 10 5 20z" fill="var(--sn-up, #FF5A36)"/>
-      <path d="M77 45c11-14 25-23 44-25l-3-8c-20 2-36 13-48 30z" fill="var(--sn-dark, #1A1A22)"/>
-      <path d="M36 74c30-22 70-28 104-14 18 7 36 9 56 6" stroke="var(--sn-mid, #FFC93C)" stroke-width="7" fill="none" stroke-linecap="round"/>
+      <path d="M12 82h198v8H12z" fill="#FFC93C"/>
+      <path d="M16 84l5-30c2-12 10-17 22-15l34 6c11-14 25-23 44-25l12-1c6 11 15 20 28 27 16 9 34 14 44 18 5 3 6 10 5 20z" fill="#FF5A36"/>
+      <path d="M77 45c11-14 25-23 44-25l-3-8c-20 2-36 13-48 30z" fill="#1A1A22"/>
+      <path d="M36 74c30-22 70-28 104-14 18 7 36 9 56 6" stroke="#FFC93C" stroke-width="7" fill="none" stroke-linecap="round"/>
       <path d="M96 40l14 10M106 34l14 10M116 29l13 9" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
     </symbol>
     <symbol id="i-spark" viewBox="0 0 24 24"><path d="M10 3.5c.7 4.2 2.8 6.3 7 7-4.2.7-6.3 2.8-7 7-.7-4.2-2.8-6.3-7-7 4.2-.7 6.3-2.8 7-7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M18.5 2.5c.3 1.6 1 2.3 2.6 2.6-1.6.3-2.3 1-2.6 2.6-.3-1.6-1-2.3-2.6-2.6 1.6-.3 2.3-1 2.6-2.6z" fill="currentColor"/></symbol>
@@ -31,7 +33,7 @@
     <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
     <symbol id="i-x" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></symbol>
     <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z" fill="currentColor"/><circle cx="12" cy="10" r="2.6" fill="#000"/></symbol>
-    <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M14 4c3-1.5 5.5-1.5 6-1 .5.5.5 3-1 6l-6 6-5-5z" fill="currentColor"/><path d="M8 10l-4 1 2-4 4-1M14 16l-1 4 4-2 1-4" fill="currentColor" opacity=".75"/><circle cx="15.5" cy="8.5" r="1.6" fill="#1677FF"/></symbol>
+    <symbol id="i-rocket" viewBox="0 0 24 24"><path d="M14 4c3-1.5 5.5-1.5 6-1 .5.5.5 3-1 6l-6 6-5-5z" fill="currentColor"/><path d="M8 10l-4 1 2-4 4-1M14 16l-1 4 4-2 1-4" fill="currentColor" opacity=".75"/><circle cx="15.5" cy="8.5" r="1.6" fill="#1A7BFF"/></symbol>
     <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
   </defs>
 </svg>
@@ -39,47 +41,49 @@
 <div id="stage" class="landscape">
   <!-- Fondo -->
   <div class="bg">
-    <div class="blob b1"></div>
-    <div class="blob b2"></div>
-    <div class="blob b3"></div>
-    <div class="grid"></div>
-    <div class="vignette"></div>
+    <div class="glow g1"></div>
+    <div class="glow g2"></div>
+    <div class="glow g3" id="glowCenter"></div>
+    <div class="cone"></div>
+    <div class="floor"><div class="floor-grid" id="floorGrid"></div></div>
+    <div class="horizon"></div>
   </div>
-
-  <!-- Marca persistente -->
-  <div class="corner-logo" id="cornerLogo">
-    <svg class="mark"><use href="#mark"/></svg>
-    <span class="wordmark">AdsGPT</span>
-  </div>
+  <div class="particles" id="particles"></div>
 
   <!-- ESCENA 1 · Hook -->
   <section class="scene" id="s1">
-    <h1 class="hook">
-      <span class="line l1"><span class="w">Pegá</span> <span class="w">un</span> <span class="w">link.</span></span>
-      <span class="line l2"><span class="w">AdsGPT</span> <span class="w">hace</span><br class="pbr"> <span class="w hl">todo</span> <span class="w hl">el</span> <span class="w hl">resto.</span></span>
-    </h1>
+    <div class="cam">
+      <div class="flare" id="flare"></div>
+      <h1 class="hook">
+        <span class="line l1 split">Pegá un link.</span>
+        <span class="line l2 split">AdsGPT hace<br class="pbr"> <span class="hl">todo el resto.</span></span>
+      </h1>
+    </div>
   </section>
 
   <!-- ESCENA 2 · Link -->
   <section class="scene" id="s2">
-    <header class="caption">
-      <span class="eyebrow"><b>01</b>Tu link</span>
-      <h2>Web, producto o&nbsp;<span class="hl">Instagram.</span></h2>
-    </header>
-    <div class="visual">
-      <div class="col">
-        <div class="urlbar">
-          <div class="url-in">
-            <svg class="url-ic"><use href="#i-spark"/></svg>
-            <span class="url-text"><span id="urlTyped"></span><i class="caret" id="caret"></i></span>
-            <span class="url-btn" id="urlBtn"><svg><use href="#i-arrow"/></svg></span>
+    <div class="cam">
+      <header class="caption">
+        <span class="eyebrow"><b>01</b>Tu link</span>
+        <h2 class="split">Web, producto o&nbsp;<span class="hl">Instagram.</span></h2>
+      </header>
+      <div class="visual">
+        <div class="col">
+          <div class="urlbar">
+            <span class="beam"></span>
+            <div class="url-in">
+              <svg class="url-ic"><use href="#i-spark"/></svg>
+              <span class="url-text"><span id="urlTyped"></span><i class="caret" id="caret"></i></span>
+              <span class="url-btn" id="urlBtn"><svg><use href="#i-arrow"/></svg></span>
+            </div>
+            <span class="ripple" id="urlRipple"></span>
           </div>
-          <span class="ripple" id="urlRipple"></span>
-        </div>
-        <div class="chips">
-          <span class="chip"><svg><use href="#i-globe"/></svg>Sitio web</span>
-          <span class="chip"><svg><use href="#i-bag"/></svg>Producto</span>
-          <span class="chip"><svg><use href="#i-cam"/></svg>Instagram</span>
+          <div class="chips">
+            <span class="chip"><svg><use href="#i-globe"/></svg>Sitio web</span>
+            <span class="chip"><svg><use href="#i-bag"/></svg>Producto</span>
+            <span class="chip"><svg><use href="#i-cam"/></svg>Instagram</span>
+          </div>
         </div>
       </div>
     </div>
@@ -87,37 +91,41 @@
 
   <!-- ESCENA 3 · Análisis -->
   <section class="scene" id="s3">
-    <header class="caption">
-      <span class="eyebrow"><b>02</b>Análisis</span>
-      <h2>Entiende <span class="hl">qué vendés.</span></h2>
-    </header>
-    <div class="visual">
-      <div class="analysis">
-        <div class="site">
-          <div class="site-bar"><i></i><i></i><i></i><span>tumarca.com/nova-run</span></div>
-          <div class="site-body">
-            <div class="site-nav"><b>NOVA</b><span></span><span></span><span></span><em></em></div>
-            <div class="site-hero">
-              <div class="hero-txt">
-                <small>NUEVO</small>
-                <h3>Nova Run 2</h3>
-                <p>Corré más liviano.</p>
-                <span class="site-btn">Comprar · $89.999</span>
+    <div class="cam">
+      <header class="caption">
+        <span class="eyebrow"><b>02</b>Análisis</span>
+        <h2 class="split">Entiende <span class="hl">qué vendés.</span></h2>
+      </header>
+      <div class="visual">
+        <div class="analysis">
+          <div class="site-wrap">
+            <div class="site">
+              <div class="site-bar"><i></i><i></i><i></i><span>tumarca.com/nova-run</span></div>
+              <div class="site-body">
+                <div class="site-nav"><b>NOVA</b><span></span><span></span><span></span><em></em></div>
+                <div class="site-hero">
+                  <div class="hero-txt">
+                    <small>NUEVO</small>
+                    <h3>Nova Run 2</h3>
+                    <p>Corré más liviano.</p>
+                    <span class="site-btn">Comprar · $89.999</span>
+                  </div>
+                  <div class="hero-img"><svg><use href="#sneaker"/></svg></div>
+                </div>
+                <div class="site-thumbs"><div></div><div></div><div></div><div></div></div>
               </div>
-              <div class="hero-img"><svg><use href="#sneaker"/></svg></div>
+              <div class="detect d1"><i></i><i></i><i></i><i></i><span>Producto · 98%</span></div>
+              <div class="detect d2"><i></i><i></i><i></i><i></i><span>Precio</span></div>
+              <div class="scan" id="scan"></div>
             </div>
-            <div class="site-thumbs"><div></div><div></div><div></div><div></div></div>
           </div>
-          <div class="detect d1"><span>Producto · 98%</span></div>
-          <div class="detect d2"><span>Precio</span></div>
-          <div class="scan" id="scan"></div>
-        </div>
-        <div class="results">
-          <div class="res"><span class="ok"><svg><use href="#i-check"/></svg></span><div><small>Tipo detectado</small><b>Producto · E-commerce</b></div></div>
-          <div class="res"><span class="ok"><svg><use href="#i-check"/></svg></span><div><small>Categoría</small><b>Calzado deportivo</b></div></div>
-          <div class="res"><span class="ok"><svg><use href="#i-check"/></svg></span><div><small>Anuncio ideal</small><b>Conversión · Ventas</b></div></div>
-          <div class="res"><span class="ok"><svg><use href="#i-check"/></svg></span><div><small>Identidad de marca</small>
-            <span class="swatches"><i style="--c:#FF5A36"></i><i style="--c:#FFC93C"></i><i style="--c:#1A1A22"></i><i style="--c:#FFF4EC"></i></span></div></div>
+          <div class="results">
+            <div class="res"><span class="ok"><svg><use href="#i-check"/></svg></span><div><small>Tipo detectado</small><b>Producto · E-commerce</b></div></div>
+            <div class="res"><span class="ok"><svg><use href="#i-check"/></svg></span><div><small>Categoría</small><b>Calzado deportivo</b></div></div>
+            <div class="res"><span class="ok"><svg><use href="#i-check"/></svg></span><div><small>Anuncio ideal</small><b>Conversión · Ventas</b></div></div>
+            <div class="res"><span class="ok"><svg><use href="#i-check"/></svg></span><div><small>Identidad de marca</small>
+              <span class="swatches"><i style="--c:#FF5A36"></i><i style="--c:#FFC93C"></i><i style="--c:#1A1A22"></i><i style="--c:#FFF4EC"></i></span></div></div>
+          </div>
         </div>
       </div>
     </div>
@@ -125,79 +133,103 @@
 
   <!-- ESCENA 4 · Creatividades -->
   <section class="scene" id="s4">
-    <header class="caption">
-      <span class="eyebrow"><b>03</b>Creatividades</span>
-      <h2>Anuncios a medida, <span class="hl">fieles a tu marca.</span></h2>
-    </header>
-    <div class="visual">
-      <div class="ads">
-        <figure class="ad-wrap">
-          <div class="ad feed">
-            <div class="ad-head"><span class="av">N</span><div><b>Nova Running</b><small>Publicidad</small></div><em>···</em></div>
-            <div class="ad-img">
-              <span class="sun"></span>
-              <svg class="shoe"><use href="#sneaker"/></svg>
-              <strong>CORRÉ MÁS<br>LIVIANO.</strong>
+    <div class="cam">
+      <header class="caption">
+        <span class="eyebrow"><b>03</b>Creatividades</span>
+        <h2 class="split">Anuncios a medida, <span class="hl">fieles a tu marca.</span></h2>
+      </header>
+      <div class="visual">
+        <div class="ads">
+          <figure class="ad-wrap">
+            <div class="ad feed">
+              <div class="ad-c">
+                <div class="ad-head"><span class="av">N</span><div><b>Nova Running</b><small>Publicidad</small></div><em>···</em></div>
+                <div class="ad-img">
+                  <span class="sun"></span>
+                  <svg class="shoe"><use href="#sneaker"/></svg>
+                  <strong>CORRÉ MÁS<br>LIVIANO.</strong>
+                </div>
+                <div class="ad-cta"><span>Nova Run 2 · Envío gratis</span><b>Comprar</b></div>
+              </div>
+              <div class="skel"><i></i><i></i><i></i><i></i></div>
+              <span class="gen-line"></span>
+              <span class="sheen"></span>
             </div>
-            <div class="ad-cta"><span>Nova Run 2 · Envío gratis</span><b>Comprar</b></div>
-          </div>
-          <figcaption>Feed · 4:5</figcaption>
-        </figure>
-        <figure class="ad-wrap">
-          <div class="ad story">
-            <div class="bars"><i></i><i></i><i></i></div>
-            <div class="st-brand"><span class="av">N</span>NOVA</div>
-            <strong>-20%</strong>
-            <p>Nova Run 2</p>
-            <svg class="shoe"><use href="#sneaker"/></svg>
-            <span class="st-cta">Ver más</span>
-          </div>
-          <figcaption>Historia · 9:16</figcaption>
-        </figure>
-        <figure class="ad-wrap">
-          <div class="ad post">
-            <small>NOVA RUNNING</small>
-            <strong>Envío gratis<br>a todo el país</strong>
-            <svg class="shoe"><use href="#sneaker"/></svg>
-            <span class="po-cta">Comprar ahora</span>
-          </div>
-          <figcaption>Post · 1:1</figcaption>
-        </figure>
-        <span class="ai-badge"><svg><use href="#i-spark"/></svg>Generado con IA</span>
+            <figcaption>Feed · 4:5</figcaption>
+          </figure>
+          <figure class="ad-wrap">
+            <div class="ad story">
+              <div class="ad-c">
+                <div class="bars"><i></i><i></i><i></i></div>
+                <div class="st-brand"><span class="av">N</span>NOVA</div>
+                <strong>-20%</strong>
+                <p>Nova Run 2</p>
+                <svg class="shoe"><use href="#sneaker"/></svg>
+                <span class="st-cta">Ver más</span>
+              </div>
+              <div class="skel"><i></i><i></i><i></i><i></i></div>
+              <span class="gen-line"></span>
+              <span class="sheen"></span>
+            </div>
+            <figcaption>Historia · 9:16</figcaption>
+          </figure>
+          <figure class="ad-wrap">
+            <div class="ad post">
+              <div class="ad-c">
+                <small>NOVA RUNNING</small>
+                <strong>Envío gratis<br>a todo el país</strong>
+                <svg class="shoe"><use href="#sneaker"/></svg>
+                <span class="po-cta">Comprar ahora</span>
+              </div>
+              <div class="skel"><i></i><i></i><i></i><i></i></div>
+              <span class="gen-line"></span>
+              <span class="sheen"></span>
+            </div>
+            <figcaption>Post · 1:1</figcaption>
+          </figure>
+          <span class="ai-badge"><svg><use href="#i-spark"/></svg>Generado con IA</span>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ESCENA 5 · Audiencia -->
   <section class="scene" id="s5">
-    <header class="caption">
-      <span class="eyebrow"><b>04</b>Audiencia</span>
-      <h2>Segmenta a tu <span class="hl">cliente&nbsp;ideal.</span></h2>
-    </header>
-    <div class="visual">
-      <div class="aud">
-        <div class="map">
-          <div class="map-dots"></div>
-          <span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span>
-          <div class="people" id="people"></div>
-          <span class="pin"><svg><use href="#i-pin"/></svg></span>
-        </div>
-        <div class="aud-rows">
-          <div class="aud-row">
-            <small>Ubicación</small>
-            <div class="geo"><svg><use href="#i-pin"/></svg>Buenos Aires, AR <em>+ 25 km</em></div>
+    <div class="cam">
+      <header class="caption">
+        <span class="eyebrow"><b>04</b>Audiencia</span>
+        <h2 class="split">Segmenta a tu <span class="hl">cliente&nbsp;ideal.</span></h2>
+      </header>
+      <div class="visual">
+        <div class="aud">
+          <div class="radar-wrap">
+            <div class="radar">
+              <div class="radar-dots"></div>
+              <span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span>
+              <span class="ring-static"></span>
+              <div class="people" id="people"></div>
+              <span class="sweep" id="sweep"></span>
+            </div>
+            <span class="pin-beam"></span>
+            <span class="pin"><svg><use href="#i-pin"/></svg></span>
           </div>
-          <div class="aud-row">
-            <small>Edad <b id="ageLabel">18 – 65</b></small>
-            <div class="slider"><span class="trk"></span><span class="rng" id="ageRange"></span><span class="hdl" id="hMin"></span><span class="hdl" id="hMax"></span></div>
-          </div>
-          <div class="aud-row">
-            <small>Intereses</small>
-            <div class="tags"><span>Running</span><span>Fitness</span><span>Moda deportiva</span><span>Maratones</span></div>
-          </div>
-          <div class="reach">
-            <small>Alcance estimado</small>
-            <b><span id="reachNum">0</span> personas</b>
+          <div class="aud-panel">
+            <div class="aud-row">
+              <small>Ubicación</small>
+              <div class="geo"><svg><use href="#i-pin"/></svg>Buenos Aires, AR <em>+ 25 km</em></div>
+            </div>
+            <div class="aud-row">
+              <small>Edad <b id="ageLabel">18 – 65</b></small>
+              <div class="slider"><span class="trk"></span><span class="rng" id="ageRange"></span><span class="hdl" id="hMin"></span><span class="hdl" id="hMax"></span></div>
+            </div>
+            <div class="aud-row">
+              <small>Intereses</small>
+              <div class="tags"><span>Running</span><span>Fitness</span><span>Moda deportiva</span><span>Maratones</span></div>
+            </div>
+            <div class="reach">
+              <small>Alcance estimado</small>
+              <b><span id="reachNum">0</span> personas</b>
+            </div>
           </div>
         </div>
       </div>
@@ -206,66 +238,87 @@
 
   <!-- ESCENA 6 · Publicación -->
   <section class="scene" id="s6">
-    <header class="caption">
-      <span class="eyebrow"><b>05</b>Publicación</span>
-      <h2>Y la <span class="hl">publica</span> por vos.</h2>
-    </header>
-    <div class="visual">
-      <div class="publish">
-        <span class="pub-btn" id="pubBtn"><svg><use href="#i-rocket"/></svg>Publicar campaña</span>
-        <span class="pub-ripple" id="pubRipple"></span>
-        <div class="pub-done" id="pubDone">
-          <span class="pub-check"><svg><use href="#i-check"/></svg></span>
-          <b>¡Campaña publicada!</b>
-          <span class="live"><i></i>En vivo · optimizando en tiempo real</span>
+    <div class="cam">
+      <header class="caption">
+        <span class="eyebrow"><b>05</b>Publicación</span>
+        <h2 class="split">Y la <span class="hl">publica</span> por vos.</h2>
+      </header>
+      <div class="visual">
+        <div class="publish">
+          <span class="pub-btn" id="pubBtn"><span class="beam"></span><svg><use href="#i-rocket"/></svg>Publicar campaña</span>
+          <span class="pub-ripple" id="pubRipple"></span>
+          <span class="trail" id="trail"></span>
+          <span class="orb" id="orb"></span>
+          <span class="shock" id="shock"></span>
+          <div class="sparks" id="sparks"></div>
+          <div class="pub-done" id="pubDone">
+            <span class="pub-check"><svg><use href="#i-check"/></svg></span>
+            <b>¡Campaña publicada!</b>
+            <span class="live"><i></i>En vivo · optimizando en tiempo real</span>
+          </div>
+          <div class="stat st-a"><small>Impresiones</small><b id="statImp">0</b><svg viewBox="0 0 120 36"><path d="M2 32 L20 28 L36 30 L52 20 L68 22 L84 12 L100 14 L118 4"/></svg></div>
+          <div class="stat st-b"><small>Clics</small><b id="statClk">0</b><svg viewBox="0 0 120 36"><path d="M2 30 L18 31 L34 24 L50 26 L66 16 L82 18 L98 8 L118 6"/></svg></div>
         </div>
-        <div class="confetti" id="confetti"></div>
       </div>
     </div>
   </section>
 
   <!-- ESCENA 7 · Comparación -->
   <section class="scene" id="s7">
-    <header class="caption">
-      <h2>No es un chat. <span class="hl">Es tu agente de anuncios.</span></h2>
-    </header>
-    <div class="visual">
-      <div class="cmp">
-        <div class="cmp-hl"></div>
-        <div class="cmp-row cmp-head">
-          <span></span>
-          <span class="cmp-chat"><svg><use href="#i-chat"/></svg>Chat de IA<br><small>convencional</small></span>
-          <span class="cmp-ads"><svg class="mark"><use href="#mark"/></svg><span class="wordmark">AdsGPT</span></span>
+    <div class="cam">
+      <header class="caption">
+        <h2 class="split">No es un chat. <span class="hl">Es tu agente de anuncios.</span></h2>
+      </header>
+      <div class="visual">
+        <div class="cmp">
+          <div class="cmp-hl"><span class="beam"></span></div>
+          <div class="cmp-row cmp-head">
+            <span></span>
+            <span class="cmp-chat"><svg><use href="#i-chat"/></svg>Chat de IA<br><small>convencional</small></span>
+            <span class="cmp-ads"><svg class="mark"><use href="#mark"/></svg><span class="wordmark">AdsGPT</span></span>
+          </div>
+          <div class="cmp-row"><span>Entiende tu link y qué vendés</span><span class="no">A medias</span><span class="yes"><svg><use href="#i-check"/></svg></span></div>
+          <div class="cmp-row"><span>Creatividades con tu identidad</span><span class="no">Genéricas</span><span class="yes"><svg><use href="#i-check"/></svg></span></div>
+          <div class="cmp-row"><span>Segmenta geo, edad e intereses</span><span class="no"><svg><use href="#i-x"/></svg></span><span class="yes"><svg><use href="#i-check"/></svg></span></div>
+          <div class="cmp-row"><span>Publica y optimiza en tiempo real</span><span class="no"><svg><use href="#i-x"/></svg></span><span class="yes"><svg><use href="#i-check"/></svg></span></div>
         </div>
-        <div class="cmp-row"><span>Entiende tu link y qué vendés</span><span class="no">A medias</span><span class="yes"><svg><use href="#i-check"/></svg></span></div>
-        <div class="cmp-row"><span>Creatividades con tu identidad</span><span class="no">Genéricas</span><span class="yes"><svg><use href="#i-check"/></svg></span></div>
-        <div class="cmp-row"><span>Segmenta geo, edad e intereses</span><span class="no"><svg><use href="#i-x"/></svg></span><span class="yes"><svg><use href="#i-check"/></svg></span></div>
-        <div class="cmp-row"><span>Publica y optimiza en tiempo real</span><span class="no"><svg><use href="#i-x"/></svg></span><span class="yes"><svg><use href="#i-check"/></svg></span></div>
       </div>
     </div>
   </section>
 
   <!-- ESCENA 8 · Cierre -->
   <section class="scene" id="s8">
-    <div class="end">
-      <div class="end-logo">
-        <span class="appicon"><svg class="mark"><use href="#mark"/></svg></span>
-        <span class="wordmark">AdsGPT</span>
+    <div class="rays" id="rays"></div>
+    <div class="cam">
+      <div class="end">
+        <div class="end-logo">
+          <span class="appicon" id="appicon">
+            <svg class="blocks" viewBox="0 0 40 30">
+              <path class="blk" fill="#fff" d="M2.2 20H10V27.8A2.2 2.2 0 0 1 7.8 30H2.2A2.2 2.2 0 0 1 0 27.8V22.2A2.2 2.2 0 0 1 2.2 20Z"/>
+              <path class="blk" fill="#fff" d="M12.2 10H20V17.8A2.2 2.2 0 0 1 17.8 20H10V12.2A2.2 2.2 0 0 1 12.2 10ZM8.4 20L10 20L10 18.4A1.6 1.6 0 0 1 8.4 20ZM11.6 20L10 20L10 21.6A1.6 1.6 0 0 1 11.6 20Z"/>
+              <path class="blk" fill="#fff" d="M22.2 0H27.8A2.2 2.2 0 0 1 30 2.2V10H20V2.2A2.2 2.2 0 0 1 22.2 0ZM18.4 10L20 10L20 8.4A1.6 1.6 0 0 1 18.4 10ZM21.6 10L20 10L20 11.6A1.6 1.6 0 0 1 21.6 10Z"/>
+              <path class="blk" fill="#fff" d="M30 10H37.8A2.2 2.2 0 0 1 40 12.2V17.8A2.2 2.2 0 0 1 37.8 20H32.2A2.2 2.2 0 0 1 30 17.8V10ZM31.6 10L30 10L30 8.4A1.6 1.6 0 0 0 31.6 10ZM28.4 10L30 10L30 11.6A1.6 1.6 0 0 0 28.4 10Z"/>
+            </svg>
+            <span class="icon-frame" id="iconFrame"></span>
+            <span class="icon-sheen" id="iconSheen"></span>
+          </span>
+          <span class="wordmark" id="endWord">AdsGPT</span>
+        </div>
+        <p class="end-tag split">Tu agente de IA para el <span class="hl">crecimiento.</span></p>
+        <div class="end-foot">
+          <span>App Store</span><i></i><span>Google Play</span><i></i><span>Web</span><i></i><span class="url">adsgpt.dev</span>
+        </div>
+        <small class="end-by">Powered by <b>Wortise</b></small>
       </div>
-      <p class="end-tag">Tu agente de IA para el <span class="hl">crecimiento.</span></p>
-      <p class="end-sub">Del link a la campaña publicada, todo automático.</p>
-      <div class="end-foot">
-        <span>Disponible en App Store, Google Play y web</span><i></i><span>adsgpt.dev</span>
-      </div>
-      <small class="end-by">Powered by <b>Wortise</b></small>
     </div>
-    <div class="flash" id="flash"></div>
   </section>
 
-  <!-- Cursor -->
-  <svg class="cursor" id="cursor" viewBox="0 0 24 24"><path d="M4 2v18l5-4.5 3.5 6.5 3-1.5-3.5-6.5H19z" fill="#fff" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/></svg>
+  <!-- Capas superiores -->
+  <div class="corner-logo" id="cornerLogo">
+    <svg class="mark"><use href="#mark"/></svg>
+    <span class="wordmark">AdsGPT</span>
+  </div>
 
-  <!-- Guía de pasos persistente -->
   <div class="stepper" id="stepper">
     <div class="trk"><div class="fill" id="stepFill"></div></div>
     <div class="step"><span class="dot"><i></i></span><label>Link</label></div>
@@ -274,9 +327,17 @@
     <div class="step"><span class="dot"><i></i></span><label>Audiencia</label></div>
     <div class="step"><span class="dot"><i></i></span><label>Publicación</label></div>
   </div>
+
+  <svg class="cursor" id="cursor" viewBox="0 0 24 24"><path d="M4 2v18l5-4.5 3.5 6.5 3-1.5-3.5-6.5H19z" fill="#fff" stroke="#000" stroke-width="1.4" stroke-linejoin="round"/></svg>
+
+  <div class="streak" id="streak"></div>
+  <div class="flash" id="flash"></div>
+  <div class="vignette"></div>
+  <div class="grain" id="grain"></div>
 </div>
 
 <script src="node_modules/gsap/dist/gsap.min.js"></script>
+<script src="cues.js"></script>
 <script src="timeline.js"></script>
 </body>
 </html>
