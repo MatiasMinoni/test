@@ -1,0 +1,19 @@
+{
+  "name": "adsgpt-presentacion",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AdsGPT · video presentación motion de 15 s (HTML + GSAP renderizado a MP4)",
+  "scripts": {
+    "render": "node render.mjs",
+    "render:16x9": "node render.mjs --format landscape",
+    "render:9x16": "node render.mjs --format portrait"
+  },
+  "dependencies": {
+    "@fontsource/inter": "^5.3.0",
+    "@fontsource/sora": "^5.3.0",
+    "gsap": "^3.15.0"
+  },
+  "devDependencies": {
+    "playwright": "^1.56.1"
+  }
+}
