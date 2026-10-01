@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Etiquetas cítrica</title>
+<style>
+@font-face { font-family: "Fraunces"; font-weight: 600; src: url("../node_modules/@fontsource/fraunces/files/fraunces-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-weight: 400; src: url("../node_modules/@fontsource/fraunces/files/fraunces-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Geist"; font-weight: 400; src: url("../node_modules/@fontsource/geist-sans/files/geist-sans-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Geist"; font-weight: 500; src: url("../node_modules/@fontsource/geist-sans/files/geist-sans-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Geist"; font-weight: 600; src: url("../node_modules/@fontsource/geist-sans/files/geist-sans-latin-600-normal.woff2") format("woff2"); }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #444; }
+.label { position: relative; overflow: hidden; color: #3B2416; font-family: "Geist", sans-serif;
+  background: radial-gradient(ellipse at 50% 40%, #FBF5EE 0%, #F4EADF 70%, #EFE3D5 100%); }
+.label::after { content: ""; position: absolute; inset: 0; opacity: .25;
+  background-image: repeating-linear-gradient(90deg, rgba(120, 90, 60, .05) 0 2px, transparent 2px 5px); }
+.center { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; text-align: center; }
+.word { font-family: "Fraunces"; font-weight: 600; letter-spacing: -.03em; line-height: .9; }
+.sub { font-weight: 600; letter-spacing: .2em; color: #E0701A; }
+.small { font-weight: 400; color: #6B5244; }
+.rule { height: 3px; background: #E0701A; opacity: .7; }
+.side { position: absolute; top: 50%; transform: translateY(-50%); width: 360px; font-size: 26px; line-height: 1.35; color: #8A7262; }
+.bars { display: flex; gap: 4px; height: 70px; margin-top: 18px; }
+.bars i { display: block; background: #6B5244; }
+.sun { width: 92px; height: 92px; margin-bottom: 26px; }
+
+#serum { width: 2420px; height: 1000px; }
+#serum .word { font-size: 230px; }
+#serum .rule { width: 520px; margin: 34px 0 30px; }
+#serum .sub { font-size: 64px; }
+#serum .small { font-size: 46px; margin-top: 18px; }
+#serum .vol { font-size: 38px; margin-top: 54px; font-weight: 500; color: #6B5244; letter-spacing: .08em; }
+
+#jar { width: 2780px; height: 300px; }
+#jar .center { flex-direction: row; gap: 46px; align-items: center; }
+#jar .word { font-size: 130px; }
+#jar .sub { font-size: 44px; }
+
+#pump { width: 1545px; height: 1000px; }
+#pump .word { font-size: 200px; }
+#pump .rule { width: 420px; margin: 30px 0 26px; }
+#pump .sub { font-size: 58px; }
+#pump .small { font-size: 42px; margin-top: 16px; }
+#pump .vol { font-size: 36px; margin-top: 48px; font-weight: 500; color: #6B5244; letter-spacing: .08em; }
+
+/* Avatar y piezas gráficas del feed de Instagram */
+#avatar { width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #F8A24A, #E0701A 70%); display: grid; place-items: center; }
+#avatar .word { font-size: 170px; color: #FFF6EC; }
+.post { width: 1080px; height: 1080px; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+#post-new { background: #E0701A; color: #FFF6EC; }
+#post-new small { font-size: 40px; font-weight: 600; letter-spacing: .3em; }
+#post-new h2 { font-family: "Fraunces"; font-weight: 600; font-size: 150px; line-height: .95; letter-spacing: -.03em; margin: 30px 0; }
+#post-new p { font-size: 44px; font-weight: 500; }
+#post-new .ring { position: absolute; width: 900px; height: 900px; border: 3px solid rgba(255, 246, 236, .25); border-radius: 50%; }
+#post-routine { background: #F6EEE4; color: #3B2416; }
+#post-routine small { font-size: 38px; font-weight: 600; letter-spacing: .3em; color: #E0701A; }
+#post-routine h2 { font-family: "Fraunces"; font-weight: 600; font-size: 116px; line-height: 1; letter-spacing: -.03em; margin: 26px 0 50px; }
+#post-routine ol { list-style: none; display: flex; flex-direction: column; gap: 22px; }
+#post-routine li { font-size: 46px; font-weight: 500; display: flex; align-items: center; gap: 22px; }
+#post-routine li b { display: grid; place-items: center; width: 66px; height: 66px; border-radius: 50%; background: #E0701A; color: #FFF6EC; font-size: 34px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="sun" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="46" fill="#E0701A"/>
+    <circle cx="50" cy="50" r="36" fill="none" stroke="#FBF5EE" stroke-width="3"/>
+    <g stroke="#FBF5EE" stroke-width="3"><path d="M50 14V86M14 50H86M24.5 24.5L75.5 75.5M75.5 24.5L24.5 75.5"/></g>
+    <circle cx="50" cy="50" r="5" fill="#FBF5EE"/>
+  </symbol>
+</svg>
+
+<div class="label" id="serum">
+  <div class="side" style="left:90px">Con ácido ascórbico estabilizado, ácido hialurónico y vitamina E. Aplicar 3 a 4 gotas por la mañana sobre la piel limpia.</div>
+  <div class="center">
+    <svg class="sun"><use href="#sun"/></svg>
+    <div class="word">cítrica</div>
+    <div class="rule"></div>
+    <div class="sub">SÉRUM VITAMINA C 15%</div>
+    <div class="small">Iluminador · Antioxidante</div>
+    <div class="vol">30 ml · 1 fl oz</div>
+  </div>
+  <div class="side" style="right:90px; text-align:right">Hecho en Argentina<br>Dermatológicamente testeado<br>Cruelty free
+    <div class="bars" style="justify-content:flex-end"><i style="width:6px"></i><i style="width:3px"></i><i style="width:8px"></i><i style="width:3px"></i><i style="width:5px"></i><i style="width:9px"></i><i style="width:3px"></i><i style="width:6px"></i><i style="width:4px"></i><i style="width:8px"></i><i style="width:3px"></i><i style="width:5px"></i></div>
+  </div>
+</div>
+
+<div class="label" id="jar">
+  <div class="center">
+    <svg class="sun" style="width:96px;height:96px;margin:0"><use href="#sun"/></svg>
+    <div class="word">cítrica</div>
+    <div class="sub">CREMA ILUMINADORA · 50 g</div>
+  </div>
+</div>
+
+<div class="label" id="pump">
+  <div class="center">
+    <svg class="sun"><use href="#sun"/></svg>
+    <div class="word">cítrica</div>
+    <div class="rule"></div>
+    <div class="sub">GEL LIMPIADOR</div>
+    <div class="small">Vitamina C + Niacinamida</div>
+    <div class="vol">150 ml · 5 fl oz</div>
+  </div>
+</div>
+
+<div id="avatar"><div class="word">cítrica</div></div>
+
+<div class="post" id="post-new">
+  <span class="ring"></span>
+  <small>NUEVO</small>
+  <h2>Sérum<br>Vitamina C</h2>
+  <p>Tu piel, con luz propia.</p>
+</div>
+
+<div class="post" id="post-routine">
+  <small>RUTINA DE MAÑANA</small>
+  <h2>Glow en<br>3 pasos</h2>
+  <ol>
+    <li><b>1</b>Gel limpiador</li>
+    <li><b>2</b>Sérum vitamina C</li>
+    <li><b>3</b>Crema iluminadora</li>
+  </ol>
+</div>
+</body>
+</html>

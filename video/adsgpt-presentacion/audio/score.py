@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 """Música y efectos del video AdsGPT, sintetizados desde cero y sincronizados con cues.js.
 
-    python3 audio/score.py out/AdsGPT_musica_15s.wav
+    python3 audio/score.py out/AdsGPT_musica_30s.wav
 
-Tema en La menor a 128 BPM (8 compases = 15 s):
-  compás 1      intro: golpe grave, pad y subida de tensión
-  compases 2-6  groove: bombo en negras, palmas, hats, bajo con sidechain, pads y arpegio
-  compás 7      build: redoble y riser hacia el cierre
-  compás 8      golpe final, 4 notas para los bloques del logo y acorde que queda sonando
+Tema en La menor a 128 BPM (16 compases = 30 s, dos por escena):
+  compases 1-2    intro: golpe grave, pads, pulsos y subida hacia el drop
+  compases 3-12   groove: bombo en negras, bajo con sidechain y pads; desde el 5 suman palmas, hats y arpegio
+  compás 13       quiebre: sin batería, pad abierto (comparación)
+  compás 14       build: redoble y riser hacia el cierre
+  compases 15-16  golpe final, 4 notas para los bloques del logo y acorde que queda sonando
 Encima van los efectos de interfaz (tipeo, clics, checks, escaneo, lanzamiento, etc.).
 """
 import json
@@ -24,7 +25,6 @@ C = json.loads(src[src.index('{'):src.rindex('}') + 1])
 BEAT = 60 / C['bpm']
 BAR = 4 * BEAT
 END = C['end']
-B = C['bars']
 N = int((END + 4) * SR)  # margen para colas; se recorta al final
 rng = np.random.default_rng(11)
 
@@ -265,6 +265,9 @@ def ping(f=1318.5, d=.9):
 
 
 # ---------------------------------------------------------------- arreglo
+S = C['scenes']
+MU = C['music']
+bar_t = lambda b: b * BAR
 A, Fm, Cm, G = 'A', 'F', 'C', 'G'
 chords = {  # (raíz del bajo, notas del pad, notas del arpegio)
     A: ('A1', ['A3', 'C4', 'E4'], ['A4', 'C5', 'E5', 'A5']),
@@ -272,87 +275,100 @@ chords = {  # (raíz del bajo, notas del pad, notas del arpegio)
     Cm: ('C2', ['G3', 'C4', 'E4'], ['C5', 'E5', 'G5', 'C6']),
     G: ('G1', ['G3', 'B3', 'D4'], ['G4', 'B4', 'D5', 'G5']),
 }
-prog = [None, A, Fm, Cm, G, A, Fm]  # compases 0..6 (el 7 es el cierre)
+cycle = [A, Fm, Cm, G]
+prog = {b: cycle[(b - MU['dropBar']) % 4] for b in range(MU['dropBar'], MU['endBar'])}
 
-# Intro (compás 1)
-place(drums, impact(.7), 0.0, .55, send=.35)
-place(music, pad([note(n) for n in ('A2', 'E3', 'A3')], B[1] - .1, att=1.0, rel=.6, cutoff=900), 0.0, .55, send=.4)
+# Intro (compases 1-2): drone, pulsos y subida hacia el drop
+place(drums, impact(.7), 0.0, .5, send=.35)
+place(music, pad([note(n) for n in ('A2', 'E3', 'A3')], BAR - .1, att=1.0, rel=.6, cutoff=900), 0.0, .5, send=.4)
+place(music, pad([note(n) for n in ('F2', 'C3', 'F3', 'A3')], BAR - .1, att=.6, rel=.4, cutoff=1300), BAR, .5, send=.4)
 for k in (1, 2, 3):
-    place(drums, thump(52, .4), k * BEAT, .35 + .1 * k)
-place(sfx, riser(B[1] - .55), .55, .55)
-place(sfx, reverse_swell(.75), B[1] - .75, .6)
-place(sfx, whoosh(.5, 300, 2500), C['hook'][1] - .12, .25, pan=.3, send=.2)
+    place(drums, thump(52, .4), k * BEAT, .3 + .08 * k)
+for k in range(8):
+    place(drums, thump(50, .25), BAR + k * BEAT / 2, .18 + .05 * k)
+for t in C['question']:
+    place(sfx, whoosh(.45, 400, 3200), t - .1, .22, pan=rng.uniform(-.5, .5), send=.2)
+place(drums, boom(1.4, 85, 40, .45), C['answer'][0], .55, send=.3)
+place(sfx, crash(), C['answer'][0], .25, send=.3)
+place(sfx, whoosh(.5, 300, 2500), C['answer'][1] - .12, .25, pan=.3, send=.2)
+place(sfx, riser(S[1] - C['answer'][0] - .2), C['answer'][0] + .2, .55)
+place(sfx, reverse_swell(.8), S[1] - .8, .6)
 
-# Groove (compases 2-6) + build (compás 7)
+# Drop (compás 3)
+place(drums, impact(.9), S[1], .7, send=.4)
+place(sfx, crash(), S[1], .45, send=.3)
+
+# Groove (compases 3-12)
 kicks = []
-t = B[1]
-while t < B[6] + 2 * BEAT - 1e-6:
-    kicks.append(t)
-    t += BEAT
-for k in kicks:
-    place(drums, kick(), k, .95)
-for bar in range(1, 7):
-    t0 = B[bar]
-    for beat in (1, 3):
-        if bar == 6 and beat == 3:
-            continue
-        place(drums, clap(), t0 + beat * BEAT, .55, send=.18)
+for b in range(MU['dropBar'], MU['grooveEndBar']):
+    t0 = bar_t(b)
+    for k in range(4):
+        kicks.append(t0 + k * BEAT)
+    if b >= MU['clapsBar']:
+        for beat in (1, 3):
+            place(drums, clap(), t0 + beat * BEAT, .55, send=.18)
     for s16 in range(16):
         tt16 = t0 + s16 * BEAT / 4
-        if bar == 6 and s16 >= 8:
-            break
         if s16 % 4 == 2:
-            place(drums, hat(True), tt16, .32, pan=.25)
-        elif s16 % 4 != 0:
-            place(drums, hat(), tt16, .22 + .08 * (s16 % 2), pan=-.2)
-    root, padn, arp = chords[prog[bar]]
-    bars_beats = 2 if bar == 6 else 4
-    for b8 in range(bars_beats * 2):
-        if b8 % 2 == 1:  # bajo en los contratiempos de corchea
-            place(music, bass(note(root), .22), t0 + b8 * BEAT / 2, .62)
-    if bar == 6:
-        place(music, pad([note(n) for n in padn], 2 * BEAT, att=.2, rel=.2), t0, .5, send=.3)
-        _, padG, _ = chords[G]
-        place(music, pad([note(n) for n in padG], 2 * BEAT, att=.6, rel=.1, cutoff=2600), t0 + 2 * BEAT, .55, send=.3)
-    else:
-        place(music, pad([note(n) for n in padn], BAR - .05, att=.25, rel=.35), t0, .5, send=.3)
-    if 2 <= bar <= 5:
-        for s16 in range(16):
-            f = note(arp[[0, 1, 2, 3, 2, 1, 2, 3][s16 % 8]])
-            p = pluck(f)
-            tt16 = t0 + s16 * BEAT / 4
-            place(music, p, tt16, .2, pan=-.35 if s16 % 2 else .35, send=.15)
-            place(music, p, tt16 + 3 * BEAT / 4, .07, pan=.7 if s16 % 2 else -.7)  # eco ping-pong
+            place(drums, hat(True), tt16, .3, pan=.25)
+        elif s16 % 4 != 0 and b >= MU['clapsBar']:
+            place(drums, hat(), tt16, .2 + .07 * (s16 % 2), pan=-.2)
+    root, padn, _ = chords[prog[b]]
+    for b8 in range(1, 8, 2):  # bajo en los contratiempos de corchea
+        place(music, bass(note(root), .22), t0 + b8 * BEAT / 2, .62)
+    place(music, pad([note(n) for n in padn], BAR - .05, att=.25, rel=.35), t0, .5, send=.3)
+# Bombos del build (dos primeros tiempos)
+kicks += [bar_t(MU['buildBar']), bar_t(MU['buildBar']) + BEAT]
+for k in kicks:
+    place(drums, kick(), k, .95)
 
-# Redoble del build
+# Arpegio
+for b in range(MU['arp'][0], MU['arp'][1]):
+    t0 = bar_t(b)
+    _, _, arp = chords[prog[b]]
+    soft = b >= MU['breakdownBar']
+    for s16 in range(16):
+        f = note(arp[[0, 1, 2, 3, 2, 1, 2, 3][s16 % 8]])
+        p = pluck(f) if not soft else lp(pluck(f), 1800)
+        tt16 = t0 + s16 * BEAT / 4
+        place(music, p, tt16, .2 if not soft else .16, pan=-.35 if s16 % 2 else .35, send=.2 if soft else .15)
+        place(music, p, tt16 + 3 * BEAT / 4, .07, pan=.7 if s16 % 2 else -.7)  # eco ping-pong
+
+# Quiebre (compás 13) y build (compás 14)
+bd = bar_t(MU['breakdownBar'])
+place(music, pad([note(n) for n in chords[Cm][1]], BAR, att=.6, rel=.3, cutoff=1100), bd, .55, send=.45)
+place(music, np.sin(2 * np.pi * note('C2') * tt(BAR)) * np.exp(-tt(BAR) / 1.5) * .4, bd, .5)
+bl = bar_t(MU['buildBar'])
+place(music, pad([note(n) for n in chords[G][1]], BAR, att=.9, rel=.1, cutoff=2600), bl, .6, send=.35)
 roll = []
-t = B[6] + 2 * BEAT
-while t < B[7] - 1e-6:
+t = bl + 2 * BEAT
+while t < S[7] - 1e-6:
     roll.append(t)
-    t += BEAT / 4 if t < B[6] + 3 * BEAT - 1e-6 else BEAT / 8
+    t += BEAT / 4 if t < bl + 3 * BEAT - 1e-6 else BEAT / 8
 for i, t in enumerate(roll):
     place(drums, clap(), t, .18 + .5 * (i / len(roll)) ** 1.5, send=.15)
-place(sfx, riser(B[7] - C['build'][0]), C['build'][0], .8)
-place(sfx, reverse_swell(1.0), B[7] - 1.0, .7)
+place(sfx, riser(S[7] - C['build'][0]), C['build'][0], .8)
+place(sfx, reverse_swell(1.0), S[7] - 1.0, .7)
 
 # Cortes entre escenas: whoosh que culmina en el tiempo fuerte
-for i, b in enumerate(B[1:7]):
+for i, b in enumerate(S[2:7]):
     place(sfx, whoosh(.5), b - .38, .5, pan=-.4 if i % 2 else .4, send=.2)
-place(sfx, crash(), B[1], .45, send=.3)
 
-# Cierre (compás 8)
-place(drums, impact(1.4), B[7], 1.0, send=.55)
-place(drums, kick(), B[7], 1.0)
-place(sfx, crash(), B[7], .7, send=.4)
+# Cierre (compases 15-16)
+END_T = S[7]
+place(drums, impact(1.4), END_T, 1.0, send=.55)
+place(drums, kick(), END_T, 1.0)
+place(sfx, crash(), END_T, .7, send=.4)
 for t, n in zip(C['logoBlocks'], ('A4', 'C5', 'E5', 'A5')):
     place(sfx, bell(note(n), 1.8, index=1.6, ratio=2.0), t, .32, send=.45)
     place(sfx, pluck(note(n), .5), t, .3, send=.3)
     place(drums, thump(58, .3), t, .5)
 final = [note(n) for n in ('A2', 'E3', 'A3', 'C4', 'E4', 'B4')]
-place(music, pad(final, END - B[7] + .2, att=.5, rel=1.2, cutoff=2400), B[7], .62, send=.5)
-place(music, np.sin(2 * np.pi * note('A1') * tt(END - B[7] + 1)) * np.exp(-tt(END - B[7] + 1) / 2.2) * .5, B[7], .45)
+place(music, pad(final, END - END_T + .2, att=.5, rel=1.2, cutoff=2400), END_T, .62, send=.5)
+place(music, np.sin(2 * np.pi * note('A1') * tt(END - END_T + 1)) * np.exp(-tt(END - END_T + 1) / 2.6) * .5, END_T, .45)
 place(sfx, whoosh(.6, 300, 3000), C['wordmark'] - .2, .3, pan=.2, send=.25)
 place(sfx, bell(note('E6'), 1.5, index=.8), C['tagline'] + .35, .07, pan=.3, send=.5)
+place(sfx, blip(note('A5')), C['cta'], .35, send=.35)
 
 # ---------------------------------------------------------------- efectos de interfaz
 n = len(C['url'])
@@ -362,8 +378,12 @@ for k in range(1, n + 1):
 for t in (C['clickLink'], C['clickPublish']):
     place(sfx, ui_click(), t - .015, .8)
 place(sfx, blip(note('E5')), C['chipDetect'], .5, send=.2)
+for i in range(6):
+    place(sfx, blip(rng.uniform(1800, 2600), .05), C['status'] + .1 + i * BEAT / 2, .08, pan=rng.uniform(-.4, .4))
+for i, t in enumerate(C['grid']):
+    place(sfx, tick(), t, .5, pan=-.4 + .16 * i)
 place(sfx, swept_noise(C['scan'][1] - C['scan'][0], 500, 6000, q=.3) * .2, C['scan'][0], .6, pan=-.2, send=.1)
-for i in range(12):
+for i in range(16):
     place(sfx, blip(rng.uniform(2200, 3600), .05), C['scan'][0] + .05 + i * BEAT / 4 * .9, .1, pan=rng.uniform(-.5, .5))
 for t in C['detect']:
     place(sfx, blip(note('A5'), .12), t, .32, pan=-.3)
@@ -374,26 +394,31 @@ for i in range(4):
 for i, t in enumerate(C['skeleton']):
     place(sfx, whoosh(.35, 500, 3000), t - .05, .22, pan=(-.6, 0, .6)[i])
 for i, t in enumerate(C['generate']):
-    place(sfx, swept_noise(.42, 900, 7000, q=.25) * np.hanning(int(.42 * SR)) ** .5 * .35, t, .45, pan=(-.5, 0, .5)[i], send=.2)
-    place(sfx, bell(note(('E6', 'A6', 'C7')[i]), .6, index=.6), t + .38, .06, pan=(-.5, 0, .5)[i], send=.3)
+    place(sfx, swept_noise(.5, 900, 7000, q=.25) * np.hanning(int(.5 * SR)) ** .5 * .35, t, .45, pan=(-.5, 0, .5)[i], send=.2)
+    place(sfx, bell(note(('E6', 'A6', 'C7')[i]), .6, index=.6), t + .46, .06, pan=(-.5, 0, .5)[i], send=.3)
 place(sfx, blip(note('A5')), C['aiBadge'], .45, send=.3)
 for t in C['pings']:
     place(sfx, ping(), t, .5, send=.6)
-place(sfx, thump(90, .25), B[4] + .3, .4)
+place(sfx, thump(90, .25), S[4] + .3, .4)
 for t, nn in zip(C['tags'], ('C5', 'E5', 'G5', 'A5')):
     place(sfx, blip(note(nn), .12), t, .28, pan=.3)
 r0, r1 = C['reach']
 tc = r0
 while tc < r1:
     place(sfx, tick(), tc, .3, pan=.35)
-    tc += .035 + .12 * ((tc - r0) / (r1 - r0)) ** 2
+    tc += .035 + .14 * ((tc - r0) / (r1 - r0)) ** 2
+place(sfx, blip(note('E5'), .14), C['summary'], .35)
 L = C['clickPublish']
-place(sfx, swept_noise(.4, 300, 7000, q=.45) * np.linspace(.2, 1, int(.4 * SR)) ** 2, L + .1, .55, send=.3)
+place(sfx, swept_noise(.4, 300, 7000, q=.45) * np.linspace(.2, 1, int(.4 * SR)) ** 2, L + .08, .55, send=.3)
 place(drums, boom(1.6, 90, 40, .5), C['success'], .7, send=.3)
 for i, nn in enumerate(('C5', 'E5', 'G5', 'C6')):
     place(sfx, bell(note(nn), 1.4, index=1.2), C['success'] + i * .045, .2, pan=(-.3, -.1, .1, .3)[i], send=.5)
-for t in C['stats']:
-    place(sfx, blip(note('E5'), .12), t, .3)
+place(sfx, whoosh(.45, 400, 3000), C['dashboard'] - .2, .3, pan=.4, send=.2)
+m0, m1 = C['metrics']
+tc = m0
+while tc < m1:
+    place(sfx, tick(), tc, .22, pan=.4)
+    tc += .04 + .16 * ((tc - m0) / (m1 - m0)) ** 2
 for i, t in enumerate(C['cmpRows'][1:]):
     place(sfx, blip(note(('A4', 'C5', 'E5', 'A5')[i])), t, .5, send=.25)
 
@@ -401,7 +426,7 @@ for i, t in enumerate(C['cmpRows'][1:]):
 # Sidechain del bombo sobre la música
 sc = np.ones(N)
 tsamp = np.arange(N) / SR
-for k in kicks + [B[7]]:
+for k in kicks + [S[7]]:
     i0 = int(k * SR)
     i1 = min(N, i0 + int(.45 * SR))
     seg = 1 - .65 * np.exp(-(tsamp[i0:i1] - k) / .11)
@@ -430,7 +455,7 @@ mixdown *= 0.16 / rms
 mixdown = np.tanh(mixdown * 1.1) / np.tanh(1.1)
 mixdown *= .93 / np.max(np.abs(mixdown))
 
-out = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, 'out', 'AdsGPT_musica_15s.wav')
+out = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, 'out', 'AdsGPT_musica_30s.wav')
 os.makedirs(os.path.dirname(out), exist_ok=True)
 pcm = (mixdown.T * 32767).astype('<i2')
 import wave

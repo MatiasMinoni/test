@@ -107,7 +107,7 @@ if (stills) {
 }
 
 // Música y efectos (sincronizados con cues.js)
-const wav = path.join(outDir, 'AdsGPT_musica_15s.wav');
+const wav = path.join(outDir, 'AdsGPT_musica_30s.wav');
 if (!range) run('python3', [path.join(ROOT, 'audio', 'score.py'), wav]);
 
 for (const format of formats) {
@@ -145,7 +145,7 @@ for (const format of formats) {
   fs.writeFileSync(list, segs.map((s) => `file '${s}'`).join('\n'));
   const video = path.join(tmp, 'video.mp4');
   run('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', list, '-c', 'copy', video]);
-  const out = path.join(outDir, range ? `test_${tag}.mp4` : `AdsGPT_presentacion_15s_${tag}.mp4`);
+  const out = path.join(outDir, range ? `test_${tag}.mp4` : `AdsGPT_presentacion_30s_${tag}.mp4`);
   // Los tramos van casi sin pérdida; la compresión final deja el archivo liviano para compartir.
   const encode = ['-c:v', 'libx264', '-preset', 'slow', '-crf', '19', '-pix_fmt', 'yuv420p', '-profile:v', 'high', '-movflags', '+faststart'];
   if (range) run('ffmpeg', ['-y', '-loglevel', 'error', '-i', video, ...encode, out]);

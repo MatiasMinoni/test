@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AdsGPT · Presentación 15s</title>
+<title>AdsGPT · Presentación 30s</title>
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -16,14 +16,6 @@
       <path fill="currentColor" d="M12.2 10H20V17.8A2.2 2.2 0 0 1 17.8 20H10V12.2A2.2 2.2 0 0 1 12.2 10ZM8.4 20L10 20L10 18.4A1.6 1.6 0 0 1 8.4 20ZM11.6 20L10 20L10 21.6A1.6 1.6 0 0 1 11.6 20Z"/>
       <path fill="currentColor" d="M22.2 0H27.8A2.2 2.2 0 0 1 30 2.2V10H20V2.2A2.2 2.2 0 0 1 22.2 0ZM18.4 10L20 10L20 8.4A1.6 1.6 0 0 1 18.4 10ZM21.6 10L20 10L20 11.6A1.6 1.6 0 0 1 21.6 10Z"/>
       <path fill="currentColor" d="M30 10H37.8A2.2 2.2 0 0 1 40 12.2V17.8A2.2 2.2 0 0 1 37.8 20H32.2A2.2 2.2 0 0 1 30 17.8V10ZM31.6 10L30 10L30 8.4A1.6 1.6 0 0 0 31.6 10ZM28.4 10L30 10L30 11.6A1.6 1.6 0 0 0 28.4 10Z"/>
-    </symbol>
-    <symbol id="sneaker" viewBox="0 0 220 120">
-      <path d="M12 86c0 12 7 18 20 18h160c14 0 18-7 18-16v-6H12z" fill="#FFFFFF"/>
-      <path d="M12 82h198v8H12z" fill="#FFC93C"/>
-      <path d="M16 84l5-30c2-12 10-17 22-15l34 6c11-14 25-23 44-25l12-1c6 11 15 20 28 27 16 9 34 14 44 18 5 3 6 10 5 20z" fill="#FF5A36"/>
-      <path d="M77 45c11-14 25-23 44-25l-3-8c-20 2-36 13-48 30z" fill="#1A1A22"/>
-      <path d="M36 74c30-22 70-28 104-14 18 7 36 9 56 6" stroke="#FFC93C" stroke-width="7" fill="none" stroke-linecap="round"/>
-      <path d="M96 40l14 10M106 34l14 10M116 29l13 9" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
     </symbol>
     <symbol id="i-spark" viewBox="0 0 24 24"><path d="M10 3.5c.7 4.2 2.8 6.3 7 7-4.2.7-6.3 2.8-7 7-.7-4.2-2.8-6.3-7-7 4.2-.7 6.3-2.8 7-7z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M18.5 2.5c.3 1.6 1 2.3 2.6 2.6-1.6.3-2.3 1-2.6 2.6-.3-1.6-1-2.3-2.6-2.6 1.6-.3 2.3-1 2.6-2.6z" fill="currentColor"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
@@ -54,8 +46,23 @@
   <section class="scene" id="s1">
     <div class="cam">
       <div class="flare" id="flare"></div>
-      <h1 class="hook">
-        <span class="line l1 split">Pegá un link.</span>
+      <div class="hook-cards">
+        <figure class="hc hc1">
+          <img src="assets/products/hero_orange.jpg" alt="">
+          <figcaption><svg><use href="#i-bag"/></svg>Sérum Vitamina C</figcaption>
+        </figure>
+        <figure class="hc hc2">
+          <div class="hc-bar"><i></i><i></i><i></i><span>citricaskin.com.ar</span></div>
+          <img src="assets/products/family.jpg" alt="">
+        </figure>
+        <figure class="hc hc3">
+          <div class="hc-ig"><img src="assets/products/avatar.png" alt=""><b>citrica.skin</b></div>
+          <img src="assets/products/flatlay.jpg" alt="">
+        </figure>
+      </div>
+      <h1 class="hook q split">¿Tenés un producto,<br> una web o un Instagram?</h1>
+      <h1 class="hook a">
+        <span class="line l1 split">Pegá el link.</span>
         <span class="line l2 split">AdsGPT hace<br class="pbr"> <span class="hl">todo el resto.</span></span>
       </h1>
     </div>
@@ -80,10 +87,11 @@
             <span class="ripple" id="urlRipple"></span>
           </div>
           <div class="chips">
-            <span class="chip"><svg><use href="#i-globe"/></svg>Sitio web</span>
-            <span class="chip"><svg><use href="#i-bag"/></svg>Producto</span>
-            <span class="chip"><svg><use href="#i-cam"/></svg>Instagram</span>
+            <span class="chip"><svg><use href="#i-globe"/></svg>citricaskin.com.ar</span>
+            <span class="chip"><svg><use href="#i-bag"/></svg>Sérum Vitamina C</span>
+            <span class="chip"><svg><use href="#i-cam"/></svg>@citrica.skin</span>
           </div>
+          <div class="status" id="status"><span class="spin"></span>Analizando <b>@citrica.skin</b></div>
         </div>
       </div>
     </div>
@@ -98,33 +106,40 @@
       </header>
       <div class="visual">
         <div class="analysis">
-          <div class="site-wrap">
-            <div class="site">
-              <div class="site-bar"><i></i><i></i><i></i><span>tumarca.com/nova-run</span></div>
-              <div class="site-body">
-                <div class="site-nav"><b>NOVA</b><span></span><span></span><span></span><em></em></div>
-                <div class="site-hero">
-                  <div class="hero-txt">
-                    <small>NUEVO</small>
-                    <h3>Nova Run 2</h3>
-                    <p>Corré más liviano.</p>
-                    <span class="site-btn">Comprar · $89.999</span>
-                  </div>
-                  <div class="hero-img"><svg><use href="#sneaker"/></svg></div>
+          <div class="ig-wrap">
+            <div class="ig">
+              <div class="ig-top"><b>citrica.skin</b><span class="ig-dots">···</span></div>
+              <div class="ig-head">
+                <img class="ig-av" src="assets/products/avatar.png" alt="">
+                <div class="ig-stats">
+                  <div><b>128</b><small>publicaciones</small></div>
+                  <div><b>48,2 mil</b><small>seguidores</small></div>
+                  <div><b>312</b><small>seguidos</small></div>
                 </div>
-                <div class="site-thumbs"><div></div><div></div><div></div><div></div></div>
               </div>
-              <div class="detect d1"><i></i><i></i><i></i><i></i><span>Producto · 98%</span></div>
-              <div class="detect d2"><i></i><i></i><i></i><i></i><span>Precio</span></div>
+              <div class="ig-bio">
+                <b>cítrica · Skincare</b>
+                <span>Sérums y cremas con vitamina C. Hecho en Argentina.</span>
+                <span>Envíos a todo el país.</span>
+                <a>citricaskin.com.ar</a>
+              </div>
+              <div class="ig-grid">
+                <div class="igp"><img src="assets/products/hero_orange.jpg" alt=""><div class="detect d1"><i></i><i></i><i></i><i></i><span>Producto · Sérum Vitamina C</span></div></div>
+                <div class="igp"><img src="assets/products/post-new.png" alt=""><div class="detect d2"><i></i><i></i><i></i><i></i><span>Paleta y tipografía</span></div></div>
+                <div class="igp"><img src="assets/products/family.jpg" alt=""></div>
+                <div class="igp"><img src="assets/products/flatlay.jpg" alt=""></div>
+                <div class="igp"><img src="assets/products/hero_cream.jpg" alt=""></div>
+                <div class="igp"><img src="assets/products/post-routine.png" alt=""></div>
+              </div>
               <div class="scan" id="scan"></div>
             </div>
           </div>
           <div class="results">
-            <div class="res"><span class="ok"><svg><use href="#i-check"/></svg></span><div><small>Tipo detectado</small><b>Producto · E-commerce</b></div></div>
-            <div class="res"><span class="ok"><svg><use href="#i-check"/></svg></span><div><small>Categoría</small><b>Calzado deportivo</b></div></div>
+            <div class="res"><span class="ok"><svg><use href="#i-check"/></svg></span><div><small>Link detectado</small><b>Perfil de Instagram · Skincare</b></div></div>
+            <div class="res"><span class="ok"><svg><use href="#i-check"/></svg></span><div><small>Producto estrella</small><b>Sérum Vitamina C 15%</b></div></div>
             <div class="res"><span class="ok"><svg><use href="#i-check"/></svg></span><div><small>Anuncio ideal</small><b>Conversión · Ventas</b></div></div>
             <div class="res"><span class="ok"><svg><use href="#i-check"/></svg></span><div><small>Identidad de marca</small>
-              <span class="swatches"><i style="--c:#FF5A36"></i><i style="--c:#FFC93C"></i><i style="--c:#1A1A22"></i><i style="--c:#FFF4EC"></i></span></div></div>
+              <span class="swatches"><i style="--c:#E0701A"></i><i style="--c:#F6EEE4"></i><i style="--c:#3B2416"></i><i style="--c:#F6D3B0"></i><em>Fraunces</em></span></div></div>
           </div>
         </div>
       </div>
@@ -143,13 +158,12 @@
           <figure class="ad-wrap">
             <div class="ad feed">
               <div class="ad-c">
-                <div class="ad-head"><span class="av">N</span><div><b>Nova Running</b><small>Publicidad</small></div><em>···</em></div>
+                <div class="ad-head"><img class="av" src="assets/products/avatar.png" alt=""><div><b>citrica.skin</b><small>Publicidad</small></div><em>···</em></div>
                 <div class="ad-img">
-                  <span class="sun"></span>
-                  <svg class="shoe"><use href="#sneaker"/></svg>
-                  <strong>CORRÉ MÁS<br>LIVIANO.</strong>
+                  <img src="assets/products/hero_orange.jpg" alt="">
+                  <strong>Tu piel, con luz propia.</strong>
                 </div>
-                <div class="ad-cta"><span>Nova Run 2 · Envío gratis</span><b>Comprar</b></div>
+                <div class="ad-cta"><span>Sérum Vitamina C 15%</span><b>Comprar</b></div>
               </div>
               <div class="skel"><i></i><i></i><i></i><i></i></div>
               <span class="gen-line"></span>
@@ -160,12 +174,11 @@
           <figure class="ad-wrap">
             <div class="ad story">
               <div class="ad-c">
+                <img class="bgimg" src="assets/products/hero_cream.jpg" alt="">
                 <div class="bars"><i></i><i></i><i></i></div>
-                <div class="st-brand"><span class="av">N</span>NOVA</div>
-                <strong>-20%</strong>
-                <p>Nova Run 2</p>
-                <svg class="shoe"><use href="#sneaker"/></svg>
-                <span class="st-cta">Ver más</span>
+                <div class="st-brand"><img class="av" src="assets/products/avatar.png" alt="">citrica.skin<small>Publicidad</small></div>
+                <div class="st-text"><strong>-20%</strong><p>en tu primer sérum</p></div>
+                <span class="st-cta">Comprar</span>
               </div>
               <div class="skel"><i></i><i></i><i></i><i></i></div>
               <span class="gen-line"></span>
@@ -176,10 +189,8 @@
           <figure class="ad-wrap">
             <div class="ad post">
               <div class="ad-c">
-                <small>NOVA RUNNING</small>
-                <strong>Envío gratis<br>a todo el país</strong>
-                <svg class="shoe"><use href="#sneaker"/></svg>
-                <span class="po-cta">Comprar ahora</span>
+                <img class="bgimg" src="assets/products/family.jpg" alt="">
+                <div class="po-band"><small>RUTINA GLOW</small><strong>Envío gratis a todo el país</strong></div>
               </div>
               <div class="skel"><i></i><i></i><i></i><i></i></div>
               <span class="gen-line"></span>
@@ -224,7 +235,7 @@
             </div>
             <div class="aud-row">
               <small>Intereses</small>
-              <div class="tags"><span>Running</span><span>Fitness</span><span>Moda deportiva</span><span>Maratones</span></div>
+              <div class="tags"><span>Skincare</span><span>Cosmética natural</span><span>Bienestar</span><span>Belleza</span></div>
             </div>
             <div class="reach">
               <small>Alcance estimado</small>
@@ -245,6 +256,14 @@
       </header>
       <div class="visual">
         <div class="publish">
+          <div class="summary" id="summary">
+            <div class="sum-row"><img src="assets/products/hero_orange.jpg" alt=""><div><small>Campaña</small><b>Sérum Vitamina C · Ventas</b></div></div>
+            <div class="sum-tiles">
+              <div><small>Creatividades</small><b>3</b></div>
+              <div><small>Audiencia</small><b>1,8 M</b></div>
+              <div><small>Presupuesto</small><b>$ 15.000/día</b></div>
+            </div>
+          </div>
           <span class="pub-btn" id="pubBtn"><span class="beam"></span><svg><use href="#i-rocket"/></svg>Publicar campaña</span>
           <span class="pub-ripple" id="pubRipple"></span>
           <span class="trail" id="trail"></span>
@@ -256,8 +275,17 @@
             <b>¡Campaña publicada!</b>
             <span class="live"><i></i>En vivo · optimizando en tiempo real</span>
           </div>
-          <div class="stat st-a"><small>Impresiones</small><b id="statImp">0</b><svg viewBox="0 0 120 36"><path d="M2 32 L20 28 L36 30 L52 20 L68 22 L84 12 L100 14 L118 4"/></svg></div>
-          <div class="stat st-b"><small>Clics</small><b id="statClk">0</b><svg viewBox="0 0 120 36"><path d="M2 30 L18 31 L34 24 L50 26 L66 16 L82 18 L98 8 L118 6"/></svg></div>
+          <div class="dash" id="dash">
+            <div class="dash-head"><img src="assets/products/hero_orange.jpg" alt=""><div><b>cítrica · Sérum Vitamina C</b><small>Campaña de ventas</small></div><span class="dash-live"><i></i>Activa</span></div>
+            <div class="dash-prog"><div class="dash-pl"><small>Progreso</small><span><b id="mImp">0</b> / 200.000 impresiones</span></div><div class="dash-bar"><i id="mBar"></i></div></div>
+            <div class="dash-tiles">
+              <div><small>Clics</small><b id="mClk">0</b></div>
+              <div><small>CTR</small><b id="mCtr">0,0 %</b></div>
+              <div><small>Ventas</small><b id="mSales">0</b></div>
+              <div><small>Inversión</small><b id="mSpend">$ 0</b></div>
+            </div>
+            <svg class="dash-spark" viewBox="0 0 400 80" preserveAspectRatio="none"><path id="mLine" d="M0 74 L40 70 L80 66 L120 58 L160 60 L200 46 L240 42 L280 30 L320 26 L360 14 L400 8"/></svg>
+          </div>
         </div>
       </div>
     </div>
@@ -305,6 +333,7 @@
           <span class="wordmark" id="endWord">AdsGPT</span>
         </div>
         <p class="end-tag split">Tu agente de IA para el <span class="hl">crecimiento.</span></p>
+        <span class="end-cta" id="endCta">Descargala gratis</span>
         <div class="end-foot">
           <span>App Store</span><i></i><span>Google Play</span><i></i><span>Web</span><i></i><span class="url">adsgpt.dev</span>
         </div>

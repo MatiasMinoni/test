@@ -2,3 +2,5 @@ node_modules/
 out/.tmp-*/
 out/test_*.mp4
 __pycache__/
+products/tex/*.exr
+assets/products/*_preview.jpg

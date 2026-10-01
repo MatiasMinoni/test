@@ -1,36 +1,51 @@
 // Hoja de tiempos compartida por la animación (timeline.js) y la música (audio/score.py).
-// 128 BPM: 1 tiempo = 0,46875 s · 1 compás = 1,875 s · 8 compases = 15 s exactos.
-// Cada escena dura un compás y todos los cortes caen en el tiempo fuerte.
+// 128 BPM: 1 tiempo = 0,46875 s · 1 compás = 1,875 s · 16 compases = 30 s exactos.
+// Cada escena dura dos compases y todos los cortes caen en el tiempo fuerte.
 window.CUES = {
   "bpm": 128,
-  "end": 15,
-  "bars": [0, 1.875, 3.75, 5.625, 7.5, 9.375, 11.25, 13.125],
-  "hook": [0.1, 0.84],
-  "type": [2.17, 2.95],
-  "url": "https://tumarca.com/nova-run",
-  "clickLink": 3.281,
-  "chipDetect": 3.36,
-  "scan": [3.98, 4.8],
-  "detect": [4.219, 4.453],
-  "results": [4.219, 4.453, 4.688, 4.922],
-  "swatches": 4.98,
-  "skeleton": [5.74, 5.857, 5.974],
-  "generate": [6.094, 6.211, 6.328],
-  "aiBadge": 6.563,
-  "sheen": 6.8,
-  "audRows": [7.734, 7.969, 8.203, 8.438],
-  "pings": [7.734, 8.203, 8.672],
-  "age": [8.0, 8.6],
-  "tags": [8.203, 8.32, 8.437, 8.554],
-  "reach": [8.44, 9.15],
-  "clickPublish": 10.078,
-  "success": 10.313,
-  "stats": [10.547, 10.664],
-  "cmpRows": [11.484, 11.719, 11.953, 12.188, 12.422],
-  "build": [12.0, 13.125],
-  "logoBlocks": [13.125, 13.242, 13.359, 13.477],
-  "logoIcon": 13.6,
-  "wordmark": 13.68,
-  "tagline": 13.95,
-  "footer": 14.25
+  "end": 30,
+  "scenes": [0, 3.75, 7.5, 11.25, 15, 18.75, 22.5, 26.25],
+  "music": { "dropBar": 2, "clapsBar": 4, "arp": [4, 13], "grooveEndBar": 12, "breakdownBar": 12, "buildBar": 13, "endBar": 14 },
+
+  "question": [0.1, 0.62, 1.1],
+  "answer": [1.875, 2.58],
+
+  "type": [4.35, 5.45],
+  "url": "instagram.com/citrica.skin",
+  "clickLink": 6.094,
+  "chipDetect": 6.2,
+  "status": 6.4,
+
+  "grid": [7.97, 8.06, 8.15, 8.24, 8.33, 8.42],
+  "scan": [8.44, 9.7],
+  "detect": [8.906, 9.375],
+  "results": [8.672, 9.141, 9.609, 10.078],
+  "swatches": 10.2,
+
+  "skeleton": [11.48, 11.6, 11.72],
+  "generate": [12.188, 12.422, 12.656],
+  "aiBadge": 13.125,
+  "sheen": 13.45,
+
+  "audRows": [15.469, 15.938, 16.406, 16.875],
+  "pings": [15.234, 16.172, 17.109],
+  "age": [15.95, 16.65],
+  "tags": [16.406, 16.523, 16.641, 16.758],
+  "reach": [16.9, 18.2],
+
+  "summary": 19.0,
+  "clickPublish": 19.922,
+  "success": 20.156,
+  "dashboard": 20.625,
+  "metrics": [20.9, 22.35],
+
+  "cmpRows": [22.734, 23.203, 23.672, 24.141, 24.609],
+  "build": [24.375, 26.25],
+
+  "logoBlocks": [26.25, 26.367, 26.484, 26.602],
+  "logoIcon": 26.72,
+  "wordmark": 26.85,
+  "tagline": 27.19,
+  "cta": 27.66,
+  "footer": 27.9
 };
